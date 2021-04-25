@@ -1,0 +1,45 @@
+// Project Colors
+$primary-light: #23a892;
+$primary-dark: #02475e;
+$secondary-light: #ff8882;
+$secondary-dark: #df5e56;
+$accent-1: #9dbeb9;
+$accent-2: #ffffff;
+
+// Type Colors
+$primary-text: #465664;
+$secondary-text: #bbbbbb;
+$alt-text: #f6f7f7;
+
+// Typography
+$h1: 72px;
+$h2: 60px;
+$h3: 48px;
+$h4: 36px;
+$h5: 30px;
+$h6: 24px;
+$p: 18px;
+
+// Spacing + Component Features
+$standard-br: 10px;
+$space: 8px;
+$box-shadow: 0px 0px 8px 0px rgba(50, 53, 50, 0.41);
+
+//// Functions
+// Flex
+@mixin flex($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin bg-img-pos {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+// @mixin multiply-px($value1, $value2) {
+//   @return ($value1 * $value2) / 1px;
+// }
