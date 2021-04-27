@@ -1,0 +1,25 @@
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .modal-btn {
+    border-radius: 27px;
+    border: none;
+    padding: 16px 40px;
+    margin: 0 16px;
+    color: white;
+    cursor: pointer;
+  }
+  #cancel-btn {
+    background-color: $secondary-light;
+    &:hover {
+      background-color: $secondary-dark;
+    }
+  }
+  #book-btn {
+    background-color: $primary-light;
+    &:hover {
+      background-color: $primary-dark;
+    }
+  }
+}

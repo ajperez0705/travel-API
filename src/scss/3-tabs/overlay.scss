@@ -1,0 +1,136 @@
+.hidden {
+  display: none;
+}
+
+.save-search-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .fa-heart-o {
+    color: white;
+    cursor: pointer;
+  }
+
+  .fa-heart {
+    color: white;
+    cursor: pointer;
+  }
+  .save-search {
+    color: white;
+    padding: 18px 24px;
+    a {
+      text-decoration: none;
+      list-style: none;
+    }
+  }
+}
+
+.modal-container {
+  margin-left: 350px;
+  width: 1300px;
+  height: 850px;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  //   transform: translate(-50%, -50%);
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   align-items: flex-end;
+  //   margin: 48px 0;
+  background-color: $accent-1;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  .hero-image > * {
+    z-index: 10;
+    position: relative;
+  }
+  .hero-image::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 30%;
+    background-color: rgba(0, 0, 0, 0.26);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 0 0 10px 10px;
+    z-index: 0;
+  }
+  .modal-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    height: 70%;
+    color: $alt-text;
+    padding: 24px 16px;
+    z-index: 5;
+
+    h6 {
+      line-height: 0.5;
+      opacity: 0.7;
+    }
+    h3 {
+      line-height: 2;
+    }
+  }
+  .modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-row-gap: 24px;
+    grid-column-gap: 40px;
+    grid-template-areas:
+      "language bio population"
+      "language bio currency"
+      "capital bio btn";
+    max-height: 500px;
+    overflow: hidden;
+    padding: 40px 48px 48px 48px;
+    .modal-card {
+      background-color: $accent-2;
+      border-radius: $standard-br;
+      box-shadow: $box-shadow;
+      padding: 16px;
+    }
+    #language {
+      grid-area: language;
+    }
+    #capital {
+      grid-area: capital;
+    }
+    #bio {
+      grid-area: bio;
+    }
+    #population {
+      grid-area: population;
+    }
+    #currency {
+      grid-area: currency;
+    }
+    .btn-container {
+      grid-area: btn;
+    }
+    .modal-card-content {
+      padding-top: 4px;
+      opacity: 0.7;
+    }
+  }
+}
+
+.modal {
+  width: 70%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+}
