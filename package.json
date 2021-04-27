@@ -1,0 +1,25 @@
+{
+  "name": "travel-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajperez0705/travel-API.git"
+  },
+  "keywords": [],
+  "author": "Andrew",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajperez0705/travel-API/issues"
+  },
+  "homepage": "https://github.com/ajperez0705/travel-API#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.32.11"
+  }
+}

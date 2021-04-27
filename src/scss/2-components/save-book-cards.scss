@@ -1,0 +1,39 @@
+.saved-container.hidden {
+  display: none;
+}
+
+.saved-container.active {
+  .saved-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 40px 0;
+  }
+  .saved-card-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .saved-card {
+      @include bg-img-pos;
+      height: 270px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      border-radius: $standard-br;
+      width: 600px;
+      cursor: pointer;
+      box-shadow: $box-shadow;
+    }
+    .saved-card-content {
+      color: $primary-text;
+      background-color: $accent-2;
+      border-radius: 0 0 10px 10px;
+      padding: 8px 24px;
+      width: 100%;
+      h6 {
+        opacity: 0.5;
+      }
+    }
+  }
+}

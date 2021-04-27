@@ -1,0 +1,20 @@
+// 1 - Basics
+
+@import "1-basics/vars.scss";
+@import "1-basics/_buttons";
+@import "1-basics/_typography";
+@import "1-basics/_base.scss";
+
+// 2 - Components
+@import "2-components/nav.scss";
+@import "2-components/booking-info.scss";
+@import "2-components/popular-cards.scss";
+@import "2-components/save-book-cards.scss";
+@import "2-components/searchcards.scss";
+
+// 3 - Tabs
+@import "3-tabs/home.scss";
+@import "3-tabs/search.scss";
+@import "3-tabs/saved.scss";
+@import "3-tabs/booked.scss";
+@import "3-tabs/overlay.scss";

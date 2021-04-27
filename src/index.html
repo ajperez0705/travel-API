@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+    <script src="js/test.js"></script>
+    <link rel="stylesheet" href="scss/main.scss">
+    <title>Travel App - API</title>
+  </head>
+  <body>
+    <!-- Nav Container Sidebar -->
+    <div class="main-nav">
+      <img class="logo" src="Images/logo.png" alt="" />
+      <div class="nav-bar">
+        <a href="#" class="nav-link active-link"><i class="fas fa-home"></i></a>
+        <a href="#" class="nav-link"><i class="fas fa-search"></i></i></a>
+        <a href="#" class="nav-link"><i class="fas fa-heart"></i></a>
+        <a href="#" class="nav-link"><i class="fas fa-bookmark"></i></a>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <!-- Home Tab Content -->
+      <div class="home-container active">
+        <img class="hero-image" src="Images/world-travel.jpg" alt="">
+        <div class="home-nav">
+          <h4>Popular</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, placeat possimus expedita nesciunt ratione provident qui debitis veritatis consectetur iure recusandae, unde, neque praesentium non repudiandae id maiores. Eligendi, temporibus!</p>
+          <section class="carousel">
+            <div class="carousel__container">
+              <div class="carousel-item"  style="background-image: url(Images/prague.jpg);">
+                <div class="info">
+                  <a><h4>Country Name</h4></a>
+                  <div class="stars">
+                    <i class="fas fa-star"></i> 
+                    <p>4.5</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item"  style="background-image: url(Images/prague.jpg);">
+                <div class="info">
+                  <a><h4>Country Name</h4></a>
+                  <div class="stars">
+                    <i class="fas fa-star"></i> 4.5
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item"  style="background-image: url(Images/prague.jpg);">
+                <div class="info">
+                  <a><h4>Country Name</h4></a>
+                  <div class="stars">
+                    <i class="fas fa-star"></i> 4.5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Search Tab Content -->
+      <div class="search-container hidden">
+        <img class="hero-image" src="Images/world-travel.jpg" alt="">
+        <div class="search-nav">
+          <form action="" method="POST" name="form">
+            <input class="form-styling"  type="text" name="username" placeholder="Search for a country"/>
+          </form>
+          <div class="pagination">
+            <a href="#" class="pagination-button" id="pagination">Page x</a>
+            <a href="#" class="pagination-button" id="pagination">Page x</a>
+          </div>
+        </div>
+
+
+        <div class="search-card-container">
+          <div
+            class="search-card"
+            style="
+              background-image: url(Images/world-travel.jpg);
+            "
+          >
+          <div class="save-search-btn-container">
+            <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i></a>
+          </div>
+            <div class="search-content-container">
+              <div class="search-content">
+                <h6>Paris</h6>
+                <h3>France</h3>
+              </div>
+            </div>
+          </div>
+    
+          <div
+            class="search-card"
+            style="
+              background-image: url(Images/world-travel.jpg);
+            "
+          >
+          <div class="save-search-btn-container">
+            <a href="#" class="save-search"><i class="far fa-heart"></i></a>
+          </div>
+            <div class="search-content-container">
+              <div class="search-content">
+                <h6>Paris</h6>
+                <h3>France</h3>
+              </div>
+            </div>
+          </div>
+    
+          <div
+            class="search-card"
+            style="
+              background-image: url(Images/world-travel.jpg);
+            "
+          >
+          <div class="save-search-btn-container">
+            <a href="#" class="save-search"><i class="far fa-heart"></i></a>
+          </div>
+            <div class="search-content-container">
+              <div class="search-content">
+                <h6>Paris</h6>
+                <h3>France</h3>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+
+      <div class="saved-container hidden">
+        <img class="hero-image" src="Images/world-travel.jpg" alt="">
+     
+        <div class="saved-title">
+          <h3>Saved Destinations</h3>
+          <p>Click on one of your saved destinations to either book a trip or remove from your list!</p>
+        </div>
+        <div class="saved-card-container">
+          <div
+            class="saved-card"
+            style="background-image: url(Images/paris.jpg)"
+          >
+            <div class="saved-card-content">
+              <h6>Capital</h6>
+              <h3>Country</h3>
+            </div>
+          </div>
+          <div
+            class="saved-card"
+            style="background-image: url(Images/paris.jpg)"
+          >
+            <div class="saved-card-content">
+              <h6>Capital</h6>
+              <h3>Country</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="booked-container hidden">
+        <img class="hero-image" src="Images/world-travel.jpg" alt="">
+        <div class="booked-title">
+          <h3>Booked Destinations</h3>
+          <p>Click on one of your booked destinations to either book a trip or remove from your list!</p>
+        </div>
+        <div class="booking">
+            <div class="booked-card-container">
+              <div
+                class="booked-card"
+                style="background-image: url(Images/paris.jpg)"
+              >
+                <div class="booked-card-content">
+                  <h6>Capital</h6>
+                  <h3>Country</h3>
+                </div>
+              </div>
+            </div>
+          <div class="booking-details">
+            <div class="details travelers small-info">
+              <h6>People</h6>
+              <h2>2</h2>
+            </div>
+            <div class="details days small-info">
+              <h6>Days</h6>
+              <h2>7</h2>
+            </div>
+            <div class="details investment big-info">
+              <h6>Investment</h6>
+              <h2>$600</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+  </body>
+</html>
