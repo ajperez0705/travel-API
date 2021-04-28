@@ -31,17 +31,18 @@
       <div class="home-container active">
         <img class="hero-image" src="Images/world-travel.jpg" alt="">
         <div class="home-nav">
-          <h4>Popular</h4>
+          <h4 class="home-title">Popular</h4>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, placeat possimus expedita nesciunt ratione provident qui debitis veritatis consectetur iure recusandae, unde, neque praesentium non repudiandae id maiores. Eligendi, temporibus!</p>
           <section class="carousel">
             <div class="carousel__container">
-              <!-- <div class="carousel-item"  style="background-image: url(Images/prague.jpg);">
+              <!-- <div class="carousel-item destination-btn"  style="background-image: url(Images/prague.jpg);"><a href="#germany">
                 <div class="info">
-                  <a><h4>Country Name</h4></a>
+                  <h4 class="country-name">Country Name</h4>
                   <div class="stars">
                     <i class="fas fa-star"></i> 4.5
                   </div>
                 </div>
+              </a>
               </div> -->
             </div>
           </section>
@@ -75,44 +76,12 @@
             <div class="search-content-container">
               <div class="search-content">
                 <h6>Paris</h6>
-                <h3>France</h3>
+                <h3 class="country-name">France</h3>
               </div>
             </div>
           </div>
     
-          <div
-            class="search-card"
-            style="
-              background-image: url(Images/world-travel.jpg);
-            "
-          >
-          <div class="save-search-btn-container">
-            <a href="#" class="save-search"><i class="far fa-heart"></i></a>
-          </div>
-            <div class="search-content-container">
-              <div class="search-content">
-                <h6>Paris</h6>
-                <h3>France</h3>
-              </div>
-            </div>
-          </div>
-    
-          <div
-            class="search-card"
-            style="
-              background-image: url(Images/world-travel.jpg);
-            "
-          >
-          <div class="save-search-btn-container">
-            <a href="#" class="save-search"><i class="far fa-heart"></i></a>
-          </div>
-            <div class="search-content-container">
-              <div class="search-content">
-                <h6>Paris</h6>
-                <h3>France</h3>
-              </div>
-            </div>
-          </div>
+        
           </div>
         </div>
 
@@ -130,18 +99,10 @@
           >
             <div class="saved-card-content">
               <h6>Capital</h6>
-              <h3>Country</h3>
+              <h3 class="country-name">Country</h3>
             </div>
           </div>
-          <div
-            class="saved-card"
-            style="background-image: url(Images/paris.jpg)"
-          >
-            <div class="saved-card-content">
-              <h6>Capital</h6>
-              <h3>Country</h3>
-            </div>
-          </div>
+          
         </div>
       </div>
 
@@ -159,7 +120,7 @@
               >
                 <div class="booked-card-content">
                   <h6>Capital</h6>
-                  <h3>Country</h3>
+                  <h3 class="country-name">Country</h3>
                 </div>
               </div>
             </div>
@@ -179,6 +140,20 @@
           </div>
         </div>
       </div>
+      <!-- <div class="spinner">
+          <svg>
+            <use href="src/img/icons.svg#icon-loader"></use>
+          </svg>
+        </div> -->
+
+        <!-- <div class="error">
+            <div>
+              <svg>
+                <use href="src/img/icons.svg#icon-alert-triangle"></use>
+              </svg>
+            </div>
+            <p>No recipes found for your query. Please try again!</p>
+          </div> -->
     </div>
     <div class="modal-container hidden">
       <div class="hero-image" style="background-image: url(Images/paris.jpg);">
@@ -187,8 +162,8 @@
           <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i></a>
         </div>
         <div class="modal-title">
-          <h6>Paris</h6>
-          <h3>France</h3>
+          <h6 class="capital">Paris</h6>
+          <h3 class="country-name">France</h3>
         </div>
       </div>
       <div class="modal-grid">
