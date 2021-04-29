@@ -5,21 +5,21 @@ import icons from "../Images/icons.svg";
 
 const popCountriesContainer = document.querySelector(".carousel__container");
 const title = document.querySelector(".home-title");
+const checkDestinationBtn = document.querySelector(".content-container");
 const modalContainer = document.querySelector(".modal-container");
+const overlay = document.querySelector(".overlay");
 
-// Use this for the destination button
-// document.addEventListener( "click", someListener );
-
-// function someListener(event){
-//     var element = event.target;
-//     if(element.tagName == 'A' && element.classList.contains("someBtn")){
-//         console.log("hi");
-//     }
-// }
+const navContainer = document.querySelector(".nav-bar");
+const navLinks = document.querySelectorAll(".nav-link");
+const navBtns = document.querySelectorAll(".nav-btn");
+const contentContainers = document.querySelectorAll(".container");
+console.log(navBtns);
 
 // API - https://restcountries.eu/
 // Country Codes - https://countrycode.org/
 /**********************************************************************************************************/
+
+/******************************Spinner*************************************/
 
 const renderSpinner = function (parentEl) {
   const markup = `<div class="spinner">
@@ -32,6 +32,7 @@ const renderSpinner = function (parentEl) {
   parentEl.insertAdjacentHTML("afterbegin", markup);
 };
 
+/******************************Loading Pop Countries******************************/
 const popCountries = ["USA", "FRA", "MEX", "DEU", "BRA"];
 
 // 1. Fetch the API
@@ -62,7 +63,7 @@ async function showPopCountries(popCountries) {
     };
 
     let markup = `
-    <a href="#${popDestination.alphaCode}"><div class="carousel-item destination-btn"  style="background-image: url(${popDestination.flag});">
+    <a href="#${popDestination.alphaCode}"><div id="#${popDestination.alphaCode}" class="carousel-item destination-btn"  style="background-image: url(${popDestination.flag});">
                 <div class="info">
                   <h4 class="country-name">${popDestination.name}</h4>
                   <div class="stars">
@@ -79,23 +80,50 @@ async function showPopCountries(popCountries) {
 
 showPopCountries(popCountries);
 
-const hello = function () {
-  console.log("hello");
+/******************************Modal Controller******************************/
+
+const modalController = function () {
+  modalContainer.classList.toggle("hidden");
+  overlay.classList.toggle("hidden");
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !modalContainer.classList.contains("hidden")) {
+      modalContainer.classList.toggle("hidden");
+      overlay.classList.toggle("hidden");
+      window.location.hash = "";
+      modalContainer.innerHTML = "";
+    }
+  });
 };
 
-// Toggle hidden class for modal container
+/***********Click on card and activate modal + render country details************/
+// Gain access to the parent class (content-container) and add an event listener that checks for e === destination-btn
+checkDestinationBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  const destinationBtn = e.target;
+  // If e === destination-btn, then toggle hidden class in modal container
+  if (destinationBtn.classList.contains("destination-btn")) {
+    console.log(destinationBtn.id);
+    window.location.hash = destinationBtn.id;
+    modalController();
+
+    // Render the country details dependind on the hash alpha code
+    countryModal();
+  }
+});
 
 // Home
 // 1. Load the popular countries using its own function
 async function countryModal() {
   try {
     const countryCode = window.location.hash.slice(1);
-    console.log(countryCode);
+    if (!countryCode) return;
 
     const res = await fetch(
       `https://restcountries.eu/rest/v2/alpha/${countryCode}`
     );
     const data = await res.json();
+    console.log(data);
 
     if (!res.ok) throw new Error(`${data.message} ${res.status}`);
 
@@ -105,9 +133,9 @@ async function countryModal() {
       capital: countryDetails.capital,
       alphaCode: countryDetails.alpha3Code,
       flag: countryDetails.flag,
-      language: countryDetails.language[0],
+      language: countryDetails.languages[0].name,
       population: countryDetails.population,
-      currency: countryDetails.currencies.name,
+      currency: countryDetails.currencies[0].name,
     };
 
     let markup = `
@@ -123,12 +151,12 @@ async function countryModal() {
       </div>
       <div class="modal-grid">
           <div class="modal-card" id="language">
-            <h5 class="modal-card-title">${countryDetails.language}</h5>
-            <p class="modal-card-content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam unde id ipsum vel officiis soluta, impedit, illo, repellendus maxime dicta repudiandae? Ea omnis optio quae sed fugiat pariatur quia sunt.</p>
+            <h5 class="modal-card-title">Language</h5>
+            <p class="modal-card-content">${countryDetails.language}</p>
           </div>
           <div class="modal-card" id="capital">
             <h5 class="modal-card-title">Capital</h5>
-            <p class="modal-card-content">Lorem ipsum dolor</p>
+            <p class="modal-card-content">${countryDetails.capital}</p>
           </div>
           <div class="modal-card" id="bio">
             <h5 class="modal-card-title">Bio</h5>
@@ -136,11 +164,11 @@ async function countryModal() {
           </div>
           <div class="modal-card" id="population">
             <h5 class="modal-card-title">Population</h5>
-            <p class="modal-card-content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam unde id ipsum vel officiis soluta, impedit, illo, repellendus maxime dicta repudiandae? Ea omnis optio quae sed fugiat pariatur quia sunt.</p>
+            <p class="modal-card-content">${countryDetails.population}</p>
           </div>
           <div class="modal-card" id="Currency">
             <h5 class="modal-card-title">Currency</h5>
-            <p class="modal-card-content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam unde id ipsum vel officiis soluta, impedit, illo, repellendus maxime dicta repudiandae? Ea omnis optio quae sed fugiat pariatur quia sunt.</p>
+            <p class="modal-card-content">${countryDetails.currency}</p>
          </div>
         <div class="btn-container">
             <button class="modal-btn" id="cancel-btn"><a href="#"></a>Cancel</button>
@@ -153,7 +181,38 @@ async function countryModal() {
     console.error(`${err} 🔥🔥🔥`);
   }
 }
-// 2. Create a function that renders the country details through the modal when country name class === the
 
-// 2. Add a feature that when the hash changes to match the country name, call a render function
-window.addEventListener("hashchange", countryModal);
+/******************Nav Controller*************************/
+const navController = function () {};
+
+navBtns.forEach((btn) => {
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const target = e.target;
+    const clickedLink = this.id;
+    console.log(clickedLink, target);
+
+    if (!target.classList.contains(".active-link")) {
+      navBtns.forEach((btn) => {
+        btn.classList.remove("active-link");
+
+        // All containers have a hidden and active class, and only one container can have active at a time
+        // Loop through all containers and if container has active, remove, and add hidden, else, return.
+        contentContainers.forEach((container) => {
+          if (container.classList.contains("active")) {
+            container.classList.remove("active");
+            container.classList.add("hidden");
+          }
+          if (container.id === clickedLink) {
+            container.classList.remove("hidden");
+            container.classList.add("active");
+          }
+          // Then, check if ids mathch, if they do, remove hidden, add active
+        });
+        target.classList.add("active-link");
+      });
+    } else return;
+  });
+});
+
+/******************Search API*************************/

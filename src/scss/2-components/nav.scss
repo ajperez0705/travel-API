@@ -25,11 +25,13 @@
     a {
       color: $alt-text;
       font-size: $h4;
-    }
-    i {
       padding: 40px 24px;
     }
   }
+}
+
+.nav-btn {
+  padding-bottom: 16px;
 }
 
 .active-link {
@@ -48,7 +50,7 @@
   --d: 16px;
 }
 
-.nav-link:hover {
+.nav-btn:hover {
   background: radial-gradient(
         circle closest-side,
         currentColor 80%,

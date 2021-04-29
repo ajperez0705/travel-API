@@ -19,23 +19,23 @@
     <div class="main-nav">
       <img class="logo" src="Images/logo.png" alt="" />
       <div class="nav-bar">
-        <a href="#" id="home" class="nav-link active-link"><i class="fas fa-home"></i></a>
-        <a href="#" id="search" class="nav-link"><i class="fas fa-search"></i></i></a>
-        <a href="#" id="saved" class="nav-link"><i class="fas fa-heart"></i></a>
-        <a href="#" id="booked" class="nav-link"><i class="fas fa-bookmark"></i></a>
+        <a href="#" class="nav-link"><i id="home" class="fas fa-home nav-btn active-link"></i></a>
+        <a href="#" class="nav-link"><i id="search" class="fas fa-search nav-btn"></i></i></a>
+        <a href="#" class="nav-link"><i id="saved" class="fas fa-heart nav-btn"></i></a>
+        <a href="#" class="nav-link"><i id="booked" class="fas fa-bookmark nav-btn"></i></a>
       </div>
     </div>
 
     <div class="content-container">
       <!-- Home Tab Content -->
-      <div class="home-container active">
+      <div id="home" class="home-container container active">
         <img class="hero-image" src="Images/world-travel.jpg" alt="">
         <div class="home-nav">
           <h4 class="home-title">Popular</h4>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, placeat possimus expedita nesciunt ratione provident qui debitis veritatis consectetur iure recusandae, unde, neque praesentium non repudiandae id maiores. Eligendi, temporibus!</p>
           <section class="carousel">
             <div class="carousel__container">
-              <!-- <div class="carousel-item destination-btn"  style="background-image: url(Images/prague.jpg);"><a href="#germany">
+              <!-- <div id="#${popDestination.alphaCode} class="carousel-item destination-btn"  style="background-image: url(Images/prague.jpg);"><a href="#germany">
                 <div class="info">
                   <h4 class="country-name">Country Name</h4>
                   <div class="stars">
@@ -50,7 +50,7 @@
       </div>
 
       <!-- Search Tab Content -->
-      <div class="search-container hidden">
+      <div id="search" class="search-container container hidden">
         <img class="hero-image" src="Images/world-travel.jpg" alt="">
         <div class="search-nav">
           <form action="" method="POST" name="form">
@@ -85,7 +85,7 @@
           </div>
         </div>
 
-      <div class="saved-container hidden">
+      <div id="saved" class="saved-container container hidden">
         <img class="hero-image" src="Images/world-travel.jpg" alt="">
      
         <div class="saved-title">
@@ -106,7 +106,7 @@
         </div>
       </div>
 
-      <div class="booked-container hidden">
+      <div id="booked" class="booked-container container hidden">
         <img class="hero-image" src="Images/world-travel.jpg" alt="">
         <div class="booked-title">
           <h3>Booked Destinations</h3>
@@ -156,7 +156,7 @@
           </div> -->
     </div>
     <div class="modal-container hidden">
-      <div class="hero-image" style="background-image: url(Images/paris.jpg);">
+      <!-- <div class="hero-image" style="background-image: url(Images/paris.jpg);">
           
         <div class="save-search-btn-container">
           <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i></a>
@@ -191,7 +191,7 @@
             <button class="modal-btn" id="cancel-btn"><a href="#"></a>Cancel</button>
             <button class="modal-btn" id="book-btn"><a href="#"></a>Book</button>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="overlay hidden"></div>
   </body>
