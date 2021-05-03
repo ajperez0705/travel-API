@@ -28,7 +28,7 @@ const renderSpinner = function (parentEl) {
 /******************************Loading Pop Countries******************************/
 
 // 1. Fetch the API
-const init = async function () {
+const loadHome = async function () {
   try {
     const popCountriesData = await model.loadPopCountries(model.popCountries);
 
@@ -39,7 +39,7 @@ const init = async function () {
   }
 };
 
-init();
+loadHome();
 
 /******************************Modal Controller******************************/
 

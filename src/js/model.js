@@ -1,5 +1,7 @@
 import { async, mark } from "regenerator-runtime/runtime";
 import destinationView from "./views/destinationModalView";
+import { API_URL } from "./config.js";
+import { getJSON } from "./helpers.js";
 
 export const state = {
   popDestination: {},
@@ -24,13 +26,7 @@ export const loadPopCountries = async function (popCountries) {
 
   const countryArr = popCountries.map(async (country) => {
     try {
-      // renderSpinner(popCountriesContainer);
-      const res = await fetch(
-        `https://restcountries.eu/rest/v2/alpha/${country}`
-      );
-      const data = res.json();
-
-      if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+      const data = await getJSON(`${API_URL}/${country}`);
       return data;
     } catch (err) {
       console.error(`${err} 🔥🔥🔥`);
