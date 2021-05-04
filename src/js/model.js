@@ -1,22 +1,12 @@
 import { async, mark } from "regenerator-runtime/runtime";
 import destinationView from "./views/destinationModalView";
-import { API_URL } from "./config.js";
+import * as config from "./config.js";
 import { getJSON } from "./helpers.js";
 
 export const state = {
   popDestination: {},
+  countryDetails: {},
 };
-
-const popCountriesContainer = document.querySelector(".carousel__container");
-const title = document.querySelector(".home-title");
-const contentContainer = document.querySelector(".content-container");
-const modalContainer = document.querySelector(".modal-container");
-const overlay = document.querySelector(".overlay");
-
-const navContainer = document.querySelector(".nav-bar");
-const navLinks = document.querySelectorAll(".nav-link");
-const navBtns = document.querySelectorAll(".nav-btn");
-const contentContainers = document.querySelectorAll(".container");
 
 export const popCountries = ["USA", "FRA", "MEX", "DEU", "BRA"];
 
@@ -26,7 +16,7 @@ export const loadPopCountries = async function (popCountries) {
 
   const countryArr = popCountries.map(async (country) => {
     try {
-      const data = await getJSON(`${API_URL}/${country}`);
+      const data = await getJSON(`${config.API_URL}/${country}`);
       return data;
     } catch (err) {
       console.error(`${err} 🔥🔥🔥`);
@@ -53,7 +43,6 @@ export const loadPopCountries = async function (popCountries) {
 // X. Render the country details on click inside of the modal
 export const countryModal = async function () {
   try {
-    const countryCode = window.location.hash.slice(1);
     if (!countryCode) return;
 
     const res = await fetch(
@@ -64,36 +53,36 @@ export const countryModal = async function () {
 
     if (!res.ok) throw new Error(`${data.message} ${res.status}`);
 
-    let countryDetails = data;
-    countryDetails = {
-      name: countryDetails.name,
-      capital: countryDetails.capital,
-      alphaCode: countryDetails.alpha3Code,
-      flag: countryDetails.flag,
-      language: countryDetails.languages[0].name,
-      population: countryDetails.population,
-      currency: countryDetails.currencies[0].name,
+    let countryData = data;
+    state.countryDetails = {
+      name: countryData.name,
+      capital: countryData.capital,
+      alphaCode: countryData.alpha3Code,
+      flag: countryData.flag,
+      language: countryData.languages[0].name,
+      population: countryData.population,
+      currency: countryData.currencies[0].name,
     };
 
     let markup = `
-      <div class="hero-image" style="background-image: url(${countryDetails.flag});">
+      <div class="hero-image" style="background-image: url(${countryData.flag});">
             
           <div class="save-search-btn-container">
             <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i></a>
           </div>
           <div class="modal-title">
-            <h6 class="capital">${countryDetails.capital}</h6>
-            <h3 class="country-name">${countryDetails.name}</h3>
+            <h6 class="capital">${countryData.capital}</h6>
+            <h3 class="country-name">${countryData.name}</h3>
           </div>
         </div>
         <div class="modal-grid">
             <div class="modal-card" id="language">
               <h5 class="modal-card-title">Language</h5>
-              <p class="modal-card-content">${countryDetails.language}</p>
+              <p class="modal-card-content">${countryData.language}</p>
             </div>
             <div class="modal-card" id="capital">
               <h5 class="modal-card-title">Capital</h5>
-              <p class="modal-card-content">${countryDetails.capital}</p>
+              <p class="modal-card-content">${countryData.capital}</p>
             </div>
             <div class="modal-card" id="bio">
               <h5 class="modal-card-title">Bio</h5>
@@ -101,11 +90,11 @@ export const countryModal = async function () {
             </div>
             <div class="modal-card" id="population">
               <h5 class="modal-card-title">Population</h5>
-              <p class="modal-card-content">${countryDetails.population}</p>
+              <p class="modal-card-content">${countryData.population}</p>
             </div>
             <div class="modal-card" id="Currency">
               <h5 class="modal-card-title">Currency</h5>
-              <p class="modal-card-content">${countryDetails.currency}</p>
+              <p class="modal-card-content">${countryData.currency}</p>
            </div>
           <div class="btn-container">
               <button class="modal-btn" id="cancel-btn"><a href="#"></a>Cancel</button>
@@ -117,4 +106,18 @@ export const countryModal = async function () {
   } catch (err) {
     console.error(`${err} 🔥🔥🔥`);
   }
+};
+
+/******************Nav Controller*************************/
+export const navChange = function () {
+  let target, clickedLink;
+  config.navBtns.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      target = e.target;
+      clickedLink = this.id;
+      console.log(target, clickedLink);
+      return { target, clickedLink };
+    });
+  });
 };

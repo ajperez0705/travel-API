@@ -4,14 +4,28 @@ class PopDestinationView {
   #parentEl = document.querySelector(".carousel__container");
   #data;
 
-  // The problem is that it is returning and going nowhere. Maybe the solution is to loop through and insertHTML for each iteration
+  // Spinner is not working yet
+  // renderSpinner = function (parentEl) {
+  //   const markup = `<div class="spinner">
+  //   <svg>
+  //     <use href="${icons}.svg#icon-loader"></use>
+  //   </svg>
+  // </div>
+  // `;
+  //   parentEl.innerHTML = "";
+  //   parentEl.insertAdjacentHTML("afterbegin", markup);
+  // };
 
   render(data) {
     this.#data = data;
-    this.#generatePopDestinationMarkup(this.#data);
+    this.#generateDestinationMarkup(this.#data);
   }
 
-  #generatePopDestinationMarkup(data) {
+  addHandlerRender(handler) {
+    handler();
+  }
+
+  #generateDestinationMarkup(data) {
     console.log(data);
     data.forEach((country) => {
       let markup = `
