@@ -26,7 +26,6 @@ class PopDestinationView {
   }
 
   #generateDestinationMarkup(data) {
-    console.log(data);
     data.forEach((country) => {
       let markup = `
           <a href="#${country.alphaCode}"><div id="#${country.alphaCode}" class="carousel-item destination-btn"  style="background-image: url(${country.flag});">

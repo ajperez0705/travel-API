@@ -2,6 +2,7 @@ import { async, mark } from "regenerator-runtime/runtime";
 import destinationView from "./views/destinationModalView";
 import * as config from "./config.js";
 import { getJSON } from "./helpers.js";
+import navView from "./views/navView";
 
 export const state = {
   popDestination: {},
@@ -109,17 +110,18 @@ export const countryModal = async function () {
 };
 
 /******************Nav Controller*************************/
-export const navChange = function () {
-  let target, clickedLink, navData;
-  config.navBtns.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      target = e.target;
-      clickedLink = this.id;
-      console.log(target);
-      navData = [target, clickedLink];
-      console.log(navData);
-      return navData;
-    });
-  });
+// export const navChange = function (e) {
+//   let target, clickedLink;
+//   let navData = [];
+//   target = e.target;
+//   clickedLink = this.id;
+//   console.log(target);
+//   navData = [target, clickedLink];
+//   console.log(navData);
+//   return navData;
+// };
+
+export const navChange = function (data) {
+  console.log(data);
+  return data;
 };

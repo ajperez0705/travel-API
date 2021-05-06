@@ -32,22 +32,20 @@ const loadHome = async function () {
   }
 };
 
-const controlNav = function () {
-  let navData = model.navChange();
+const controlNav = function (data) {
+  let navData = model.navChange(data);
   console.log(navData);
   const targetData = navData[0];
   const clickedData = navData[1];
 
-  console.log(targetData, clickedData);
-
   // Render
-  // navView.render(targetData, clickedData);
+  navView.render(targetData, clickedData);
 };
 
 // Pub - Sub Pattern
 const init = function () {
   popDestinationView.addHandlerRender(loadHome);
-  navView.navHandler(controlNav);
+  navView.navHandlerClick(controlNav);
 };
 
 init();
