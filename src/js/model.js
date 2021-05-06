@@ -110,14 +110,16 @@ export const countryModal = async function () {
 
 /******************Nav Controller*************************/
 export const navChange = function () {
-  let target, clickedLink;
+  let target, clickedLink, navData;
   config.navBtns.forEach((btn) => {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
       target = e.target;
       clickedLink = this.id;
-      console.log(target, clickedLink);
-      return { target, clickedLink };
+      console.log(target);
+      navData = [target, clickedLink];
+      console.log(navData);
+      return navData;
     });
   });
 };

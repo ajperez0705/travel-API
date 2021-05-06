@@ -1,7 +1,7 @@
 class NavView {
   #navBtns = document.querySelectorAll(".nav-btn");
   #navContainer = document.querySelector(".nav-bar");
-  #navLinksnavLinks = document.querySelectorAll(".nav-link");
+  #navLinks = document.querySelectorAll(".nav-link");
   #contentContainer = document.querySelector(".content-container");
   #targetData;
   #clickedData;
@@ -13,8 +13,8 @@ class NavView {
     this.#settleNav(this.#targetData, this.#clickedData);
   }
 
-  addHandlerRender(handler) {
-    ["click"].forEach((ev) => window.addEventListener(ev, handler));
+  navHandler(handler) {
+    ["click"].forEach((ev) => this.#navContainer.addEventListener(ev, handler));
   }
 
   #settleNav(targetData, clickedData) {
