@@ -45,9 +45,10 @@ const controlNav = function (data) {
 
 const modalControl = async function () {
   modalView._toggleModal(config.modalContainer, config.overlay);
+  let countryCode = window.location.hash.slice(1);
 
   try {
-    const countryData = await model.countryModal();
+    let countryData = await model.countryModal(countryCode);
     console.log(countryData);
     // if (!COUNTRY_CODE) return;
 
@@ -57,11 +58,17 @@ const modalControl = async function () {
   }
 };
 
+const modalClose = function (ev) {
+  model.closeModal(ev);
+};
+
 // Pub - Sub Pattern
 const init = function () {
   popDestinationView.addHandlerRender(loadHome);
   navView.navHandlerClick(controlNav);
   modalView.modalHandlerClick(modalControl);
+  // modalView.modalHandlerClose(modalClose, config.modalContainer);
+  modalView.modalHandlerCloseRe(modalClose);
 };
 
 init();

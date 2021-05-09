@@ -42,12 +42,11 @@ export const loadPopCountries = async function (popCountries) {
 
 // Home
 // X. Render the country details on click inside of the modal
-export const countryModal = async function () {
+export const countryModal = async function (countryCode) {
   // if (!COUNTRY_CODE) return;
-  console.log(config.COUNTRY_CODE);
+  console.log(countryCode);
   try {
-    const data = await getJSON(`${config.API_URL}/${config.COUNTRY_CODE}`);
-    console.log(config.COUNTRY_CODE);
+    const data = await getJSON(`${config.API_URL}/${countryCode}`);
     return data;
   } catch (err) {
     console.log(`Error loading the modal ${err} 🔥`);
@@ -66,8 +65,30 @@ export const countryModal = async function () {
   return state.countryDetails;
 };
 
-export const checkModalOpen = function () {};
+export const closeModal = function (ev) {
+  if (
+    (ev.key === "Escape" &&
+      !config.modalContainer.classList.contains("hidden")) ||
+    (ev.target.closest(".cancel-btn") &&
+      !config.modalContainer.classList.contains("hidden"))
+  ) {
+    console.log(ev);
+    config.modalContainer.classList.add("hidden");
+    config.overlay.classList.add("hidden");
+    window.location.hash = "";
+    config.modalContainer.innerHTML = "";
+    state.countryDetails = {};
+  } else return;
+};
 
+// export const closeModal = function () {
+//   config.modalContainer.classList.add("hidden");
+//   config.overlay.classList.add("hidden");
+//   window.location.hash = "";
+//   config.modalContainer.innerHTML = "";
+//   console.log(state.country);
+//   state.countryDetails = {};
+// };
 /******************Nav Controller*************************/
 // export const navChange = function (e) {
 //   let target, clickedLink;

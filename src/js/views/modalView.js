@@ -25,7 +25,7 @@ class ModalView {
 
         // Render the country details dependind on the hash alpha code
         handler();
-      }
+      } else return;
     });
   }
 
@@ -35,28 +35,25 @@ class ModalView {
     overlay.classList.remove("hidden");
   }
 
-  exitModal() {
-    this.#parentEl.addEventListener("keydown", function (e) {
-      e.preventDefault();
-      console.log("clicked");
-      if (
-        e.key === "Escape" &&
-        !this._modalContainer.classList.contains("hidden")
-      ) {
-        exitModalTwo();
-      }
-    });
-  }
+  // modalHandlerClose(handler, modalContainer) {
+  //   this.#parentEl.addEventListener("keydown", function (e) {
+  //     e.preventDefault();
+  //     console.log("clicked");
+  //     if (e.key === "Escape" && !modalContainer.classList.contains("hidden")) {
+  //       handler();
+  //     } else return;
+  //   });
+  // }
 
-  exitModalTwo() {
-    this._modalContainer.classList.add("hidden");
-    this._overlay.classList.add("hidden");
-    window.location.hash = "";
-    this._modalContainer.innerHTML = "";
+  modalHandlerCloseRe(handler) {
+    ["keydown", "click"].forEach((ev) => {
+      this._modalContainer.addEventListener(ev, handler);
+    });
   }
 
   render(data) {
     this.#data = data;
+    console.log(data);
     const markup = this.#generateModalMarkup(data);
     this._modalContainer.insertAdjacentHTML("afterbegin", markup);
   }
@@ -95,7 +92,7 @@ class ModalView {
               <p class="modal-card-content">${data.currency}</p>
            </div>
           <div class="btn-container">
-              <button class="modal-btn" id="cancel-btn"><a href="#"></a>Cancel</button>
+              <button class="modal-btn cancel-btn" id="cancel-btn"><a href="#"></a>Cancel</button>
               <button class="modal-btn" id="book-btn"><a href="#"></a>Book</button>
           </div>
         </div>
