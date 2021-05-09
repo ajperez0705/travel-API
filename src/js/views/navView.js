@@ -1,21 +1,19 @@
 class NavView {
-  #navBtns = document.querySelectorAll(".nav-btn");
-  #navContainer = document.querySelector(".nav-bar");
-  #contentContainers = document.querySelectorAll(".container");
-  #navLinks = document.querySelectorAll(".nav-link");
-  // #contentContainer = document.querySelector(".content-container");
-  #targetData;
-  #clickedData;
+  _navBtns = document.querySelectorAll(".nav-btn");
+  _navContainer = document.querySelector(".nav-bar");
+  _contentContainers = document.querySelectorAll(".container");
+  _targetData;
+  _clickedData;
 
   render(targetData, clickedData) {
-    this.#targetData = targetData;
-    this.#clickedData = clickedData;
-    console.log(this.#targetData, this.#clickedData);
-    this.#settleNav(this.#targetData, this.#clickedData);
+    this._targetData = targetData;
+    this._clickedData = clickedData;
+    console.log(this._targetData, this._clickedData);
+    this._settleNav(this._targetData, this._clickedData);
   }
 
   // navHandlerClick(handler) {
-  //   this.#navBtns.forEach((btn) => {
+  //   this._navBtns.forEach((btn) => {
   //     btn.addEventListener("click", function (e) {
   //       e.preventDefault();
   //       handler(e);
@@ -24,7 +22,7 @@ class NavView {
   // }
 
   navHandlerClick(handler) {
-    this.#navContainer.addEventListener("click", function (e) {
+    this._navContainer.addEventListener("click", function (e) {
       let navData = [];
       const btn = e.target.closest(".nav-btn");
       const id = btn.id;
@@ -35,14 +33,14 @@ class NavView {
     });
   }
 
-  #settleNav(targetData, clickedData) {
+  _settleNav(targetData, clickedData) {
     if (!targetData.classList.contains(".active-link")) {
-      this.#navBtns.forEach((btn) => {
+      this._navBtns.forEach((btn) => {
         btn.classList.remove("active-link");
 
         // All containers have a hidden and active class, and only one container can have active at a time
         // Loop through all containers and if container has active, remove, and add hidden, else, return.
-        this.#contentContainers.forEach((container) => {
+        this._contentContainers.forEach((container) => {
           if (container.classList.contains("active")) {
             container.classList.remove("active");
             container.classList.add("hidden");

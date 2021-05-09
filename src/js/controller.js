@@ -1,13 +1,15 @@
 // Importing from the model
 import * as model from "./model.js";
 import * as config from "./config.js";
-import destinationModalView from "./views/destinationModalView";
+
+// Importing Views
 import popDestinationView from "./views/popDestinationView";
 import navView from "./views/navView.js";
+import modalView from "./views/modalView.js";
 
 // import "core-js/stble";
 import "regenerator-runtime/runtime";
-import { async, mark } from "regenerator-runtime/runtime";
+// import { async, mark } from "regenerator-runtime/runtime";
 import icons from "../Images/icons.svg";
 
 // API - https://restcountries.eu/
@@ -34,7 +36,6 @@ const loadHome = async function () {
 
 const controlNav = function (data) {
   let navData = model.navChange(data);
-  console.log(navData);
   const targetData = navData[0];
   const clickedData = navData[1];
 
@@ -42,46 +43,29 @@ const controlNav = function (data) {
   navView.render(targetData, clickedData);
 };
 
+const modalControl = async function () {
+  modalView._toggleModal(config.modalContainer, config.overlay);
+
+  try {
+    const countryData = await model.countryModal();
+    console.log(countryData);
+    // if (!COUNTRY_CODE) return;
+
+    modalView.render(countryData);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 // Pub - Sub Pattern
 const init = function () {
   popDestinationView.addHandlerRender(loadHome);
   navView.navHandlerClick(controlNav);
+  modalView.modalHandlerClick(modalControl);
 };
 
 init();
 
 /******************************Modal Controller******************************/
-
-const modalController = function () {
-  // Control Modal popup logic
-
-  config.modalContainer.classList.toggle("hidden");
-  config.overlay.classList.toggle("hidden");
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !modalContainer.classList.contains("hidden")) {
-      config.modalContainer.classList.toggle("hidden");
-      config.overlay.classList.toggle("hidden");
-      window.location.hash = "";
-      config.modalContainer.innerHTML = "";
-    }
-  });
-};
-
-/***********Click on card and activate modal + render country details************/
-// Gain access to the parent class (content-container) and add an event listener that checks for e === destination-btn
-// config.contentContainer.addEventListener("click", function (e) {
-//   e.preventDefault();
-//   const destinationBtn = e.target;
-//   // If e === destination-btn, then toggle hidden class in modal container
-//   if (destinationBtn.classList.contains("destination-btn")) {
-//     console.log(destinationBtn.id);
-//     window.location.hash = destinationBtn.id;
-//     modalController();
-
-//     // Render the country details dependind on the hash alpha code
-//     countryModal();
-//   }
-// });
 
 /******************Search API*************************/

@@ -9,9 +9,6 @@ export const popCountriesContainer = document.querySelector(
 );
 export const title = document.querySelector(".home-title");
 
-export const modalContainer = document.querySelector(".modal-container");
-export const overlay = document.querySelector(".overlay");
-
 export const contentContainers = document.querySelectorAll(".container");
 export const contentContainer = document.querySelector(".content-container");
 
@@ -19,4 +16,7 @@ export const contentContainer = document.querySelector(".content-container");
 export const navBtns = document.querySelectorAll(".nav-btn");
 
 // Modal Logic
-export const countryCode = window.location.hash.slice(1);
+export const COUNTRY_CODE = window.location.hash.slice(1);
+
+export const modalContainer = document.querySelector(".modal-container");
+export const overlay = document.querySelector(".overlay");

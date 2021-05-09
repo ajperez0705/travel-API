@@ -1,5 +1,3 @@
-import { mark } from "regenerator-runtime";
-
 class PopDestinationView {
   #parentEl = document.querySelector(".carousel__container");
   #data;
@@ -8,7 +6,7 @@ class PopDestinationView {
   // renderSpinner = function (parentEl) {
   //   const markup = `<div class="spinner">
   //   <svg>
-  //     <use href="${icons}.svg#icon-loader"></use>
+  //     <use href="${icons}.svg_icon-loader"></use>
   //   </svg>
   // </div>
   // `;

@@ -12,4 +12,4 @@ class DestinationModalView {
   #generateModalDestination(data) {}
 }
 
-export default new DestinationModalView();
+// export default new DestinationModalView();

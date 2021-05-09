@@ -43,71 +43,30 @@ export const loadPopCountries = async function (popCountries) {
 // Home
 // X. Render the country details on click inside of the modal
 export const countryModal = async function () {
+  // if (!COUNTRY_CODE) return;
+  console.log(config.COUNTRY_CODE);
   try {
-    if (!countryCode) return;
-
-    const res = await fetch(
-      `https://restcountries.eu/rest/v2/alpha/${countryCode}`
-    );
-    const data = await res.json();
-    console.log(data);
-
-    if (!res.ok) throw new Error(`${data.message} ${res.status}`);
-
-    let countryData = data;
-    state.countryDetails = {
-      name: countryData.name,
-      capital: countryData.capital,
-      alphaCode: countryData.alpha3Code,
-      flag: countryData.flag,
-      language: countryData.languages[0].name,
-      population: countryData.population,
-      currency: countryData.currencies[0].name,
-    };
-
-    let markup = `
-      <div class="hero-image" style="background-image: url(${countryData.flag});">
-            
-          <div class="save-search-btn-container">
-            <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i></a>
-          </div>
-          <div class="modal-title">
-            <h6 class="capital">${countryData.capital}</h6>
-            <h3 class="country-name">${countryData.name}</h3>
-          </div>
-        </div>
-        <div class="modal-grid">
-            <div class="modal-card" id="language">
-              <h5 class="modal-card-title">Language</h5>
-              <p class="modal-card-content">${countryData.language}</p>
-            </div>
-            <div class="modal-card" id="capital">
-              <h5 class="modal-card-title">Capital</h5>
-              <p class="modal-card-content">${countryData.capital}</p>
-            </div>
-            <div class="modal-card" id="bio">
-              <h5 class="modal-card-title">Bio</h5>
-              <p class="modal-card-content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam unde id ipsum vel officiis soluta, impedit, illo, repellendus maxime dicta repudiandae? Ea omnis optio quae sed fugiat pariatur quia sunt.</p>
-            </div>
-            <div class="modal-card" id="population">
-              <h5 class="modal-card-title">Population</h5>
-              <p class="modal-card-content">${countryData.population}</p>
-            </div>
-            <div class="modal-card" id="Currency">
-              <h5 class="modal-card-title">Currency</h5>
-              <p class="modal-card-content">${countryData.currency}</p>
-           </div>
-          <div class="btn-container">
-              <button class="modal-btn" id="cancel-btn"><a href="#"></a>Cancel</button>
-              <button class="modal-btn" id="book-btn"><a href="#"></a>Book</button>
-          </div>
-        </div>
-      `;
-    modalContainer.insertAdjacentHTML("afterbegin", markup);
+    const data = await getJSON(`${config.API_URL}/${config.COUNTRY_CODE}`);
+    console.log(config.COUNTRY_CODE);
+    return data;
   } catch (err) {
-    console.error(`${err} 🔥🔥🔥`);
+    console.log(`Error loading the modal ${err} 🔥`);
   }
+  let countryData = data;
+  console.log(countryData);
+  state.countryDetails = {
+    name: countryData.name,
+    capital: countryData.capital,
+    alphaCode: countryData.alpha3Code,
+    flag: countryData.flag,
+    language: countryData.languages[0].name,
+    population: countryData.population,
+    currency: countryData.currencies[0].name,
+  };
+  return state.countryDetails;
 };
+
+export const checkModalOpen = function () {};
 
 /******************Nav Controller*************************/
 // export const navChange = function (e) {
@@ -122,6 +81,5 @@ export const countryModal = async function () {
 // };
 
 export const navChange = function (data) {
-  console.log(data);
   return data;
 };
