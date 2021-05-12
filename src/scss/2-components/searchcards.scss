@@ -29,7 +29,7 @@
     }
     .pagination {
       padding: 0 32px;
-      a {
+      .pagination-button {
         // text-decoration: none;
         color: $primary-dark;
         padding: 0 16px;
@@ -37,8 +37,17 @@
     }
   }
   .search-card-container {
-    @include flex(row);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 24px;
+    grid-row-gap: 120px;
     margin: 48px 0;
+    a {
+      text-decoration: none;
+    }
+
+    // width: 100px;
     // padding: ;
     .search-card {
       border-radius: $standard-br;
@@ -47,8 +56,11 @@
       height: 270px;
       width: 420px;
       box-shadow: $box-shadow;
-      margin: 0 40px;
       cursor: pointer;
+      .search-card > * {
+        z-index: 10;
+        position: relative;
+      }
     }
     .save-search-btn-container {
       display: flex;
@@ -66,10 +78,10 @@
       .save-search {
         color: white;
         padding: 18px 24px;
-        a {
-          text-decoration: none;
-          list-style: none;
-        }
+        // a {
+        //   text-decoration: none;
+        //   list-style: none;
+        // }
       }
     }
     .search-content-container {

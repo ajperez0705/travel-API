@@ -15,17 +15,7 @@ class ModalView {
       e.preventDefault();
       const destinationBtn = e.target;
 
-      // If e === destination-btn, then toggle hidden class in modal container
-      if (destinationBtn.classList.contains("destination-btn")) {
-        console.log(destinationBtn.id);
-        window.location.hash = destinationBtn.id;
-
-        // If escape is pressed while the container DOES NOT have the hidden class, then toggle class and set html and hash to empty
-        // this.#exitModal();
-
-        // Render the country details dependind on the hash alpha code
-        handler();
-      } else return;
+      handler(destinationBtn);
     });
   }
 
@@ -53,7 +43,6 @@ class ModalView {
 
   render(data) {
     this.#data = data;
-    console.log(data);
     const markup = this.#generateModalMarkup(data);
     this._modalContainer.insertAdjacentHTML("afterbegin", markup);
   }

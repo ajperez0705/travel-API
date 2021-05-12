@@ -7,6 +7,12 @@ import navView from "./views/navView";
 export const state = {
   popDestination: {},
   countryDetails: {},
+  search: {
+    query: "",
+    results: [],
+    page: 1,
+    resultsPerPage: config.RES_PER_PAGE,
+  },
 };
 
 export const popCountries = ["USA", "FRA", "MEX", "DEU", "BRA"];
@@ -40,11 +46,18 @@ export const loadPopCountries = async function (popCountries) {
 
 // Push the created object into an array and return the array at the end
 
+export const setCountryCode = function (el) {
+  const destination = el.closest(".destination-btn");
+
+  window.location.hash = destination.id;
+
+  return window.location.hash.slice(1);
+};
+
 // Home
 // X. Render the country details on click inside of the modal
-export const countryModal = async function (countryCode) {
+export const countryModalDetails = async function (countryCode) {
   // if (!COUNTRY_CODE) return;
-  console.log(countryCode);
   try {
     const data = await getJSON(`${config.API_URL}/${countryCode}`);
     return data;
@@ -72,7 +85,6 @@ export const closeModal = function (ev) {
     (ev.target.closest(".cancel-btn") &&
       !config.modalContainer.classList.contains("hidden"))
   ) {
-    console.log(ev);
     config.modalContainer.classList.add("hidden");
     config.overlay.classList.add("hidden");
     window.location.hash = "";
@@ -103,4 +115,37 @@ export const closeModal = function (ev) {
 
 export const navChange = function (data) {
   return data;
+};
+
+export const searchResults = async function (query) {
+  try {
+    state.search.query = query;
+
+    const data = await getJSON(`${config.API_SEARCH}/${query}`);
+
+    state.search.results = data.map((country) => {
+      return {
+        name: country.name,
+        capital: country.capital,
+        flag: country.flag,
+        alphaCode: country.alpha3Code,
+      };
+    });
+  } catch (err) {
+    console.error(`${err} found in search call within model`);
+  }
+};
+
+// To extract the data
+//
+
+// Pagination
+export const getSearchResultsPage = function (page = state.search.page) {
+  state.search.page = page;
+
+  const start = (page - 1) * state.search.resultsPerPage;
+  const end = page * state.search.resultsPerPage;
+  console.log(state.search.results.slice(start, end));
+
+  return state.search.results.slice(start, end);
 };
