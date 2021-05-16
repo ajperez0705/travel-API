@@ -31,7 +31,7 @@ class SearchView {
     "
     >
                 <div class="save-search-btn-container">
-                  <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i>
+                  <span class="save-search"><i id='heart' class="far fa-heart"></i>
                 </div>
                 <div class="search-content-container ">
                     <div class="search-content">
@@ -42,6 +42,27 @@ class SearchView {
             </div> 
         </a>
             `;
+
+    // <i class="fas fa-heart"></i> === filled heart
+
+    //         return `
+    //   <a href="#${country.alphaCode}"><div id=#${country.alphaCode} class="search-card destination-btn"
+    // style="
+    // background-image: url(${country.flag});
+    // "
+    // >
+    //             <div class="save-search-btn-container">
+    //               <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i>
+    //             </div>
+    //             <div class="search-content-container ">
+    //                 <div class="search-content">
+    //                   <h6>${country.capital}</h6>
+    //                   <h3 class="country-name">${country.name}</h3>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </a>
+    //         `;
   }
 
   addHandlerSearch(handler) {

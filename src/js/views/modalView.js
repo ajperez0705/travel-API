@@ -10,12 +10,19 @@ class ModalView {
 
   modalHandlerClick(handler) {
     /***********Click on card and activate modal + render country details************/
-    // Gain access to the parent class (content-container) and add an event listener that checks for e === destination-btn
     this.#parentEl.addEventListener("click", function (e) {
       e.preventDefault();
-      const destinationBtn = e.target;
+      const destinationBtn = e.target.closest(".destination-btn");
 
       handler(destinationBtn);
+    });
+  }
+
+  modalSaveDestination(handler) {
+    this._modalContainer.addEventListener("click", function (e) {
+      const btn = e.target.closest("#heart");
+
+      handler(btn);
     });
   }
 
@@ -48,13 +55,12 @@ class ModalView {
   }
 
   #generateModalMarkup(data) {
-    console.log(data.name);
     return `
       <div class="hero-image" style="background-image: url(${data.flag});">
             
-          <div class="save-search-btn-container">
-            <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i></a>
-          </div>
+      <div class="save-search-btn-container">
+      <span class="save-search"><i id='heart' class="far fa-heart"></i>
+    </div>
           <div class="modal-title">
             <h6 class="capital">${data.capital}</h6>
             <h3 class="country-name">${data.name}</h3>

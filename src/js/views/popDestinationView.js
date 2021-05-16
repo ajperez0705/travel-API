@@ -26,16 +26,19 @@ class PopDestinationView {
   #generateDestinationMarkup(data) {
     data.forEach((country) => {
       let markup = `
-          <a href="#${country.alphaCode}">
+          
             <div id="#${country.alphaCode}" class="carousel-item destination-btn"  style="background-image: url(${country.flag});">
-              <div class="info">
-                <h4 class="country-name">${country.name}</h4>
-                <div class="stars">
-                   <i class="fas fa-star"></i> 4.5
+            <div class="info">
+            <h4 class="country-name">${country.name}</h4>
+            <div class="stars">
+            <i class="fas fa-star"></i> 4.5
+            <div class="save-search-btn-container">
+                  <span class="save-search"><i id='heart' class="far fa-heart"></i>
                 </div>
-              </div>
+            </div>
+            </div>
            </div>
-          </a>aAZ
+          
           `;
       this.#parentEl.insertAdjacentHTML("afterbegin", markup);
     });

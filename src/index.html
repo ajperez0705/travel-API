@@ -10,7 +10,7 @@
       integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="scss/main.scss">
+    <link rel="stylesheet" href="scss/main.scss" />
     <script defer src="js/controller.js"></script>
     <title>Travel App - API</title>
   </head>
@@ -19,22 +19,45 @@
     <div class="main-nav">
       <img class="logo" src="Images/logo.png" alt="" />
       <div class="nav-bar">
-        <a href="#" class="nav-link"><i id="home" class="fas fa-home nav-btn"></i></a>
-        <a href="#" class="nav-link"><i id="search" class="fas fa-search nav-btn active-link"></i></i></a>
-        <a href="#" class="nav-link"><i id="saved" class="fas fa-heart nav-btn"></i></a>
-        <a href="#" class="nav-link"><i id="booked" class="fas fa-bookmark nav-btn"></i></a>
+        <a href="#" class="nav-link"
+          ><i id="home" class="fas fa-home nav-btn active-link"></i
+        ></a>
+        <a href="#" class="nav-link"
+          ><i id="search" class="fas fa-search nav-btn"></i
+        ></a>
+        <a href="#" class="nav-link"
+          ><i id="saved" class="fas fa-heart nav-btn"></i
+        ></a>
+        <a href="#" class="nav-link"
+          ><i id="booked" class="fas fa-bookmark nav-btn"></i
+        ></a>
       </div>
     </div>
 
     <div class="content-container">
       <!-- Home Tab Content -->
-      <div id="home" class="home-container container hidden">
-        <img class="hero-image" src="Images/world-travel.jpg" alt="">
+      <div id="home" class="home-container container active">
+        <img class="hero-image" src="Images/world-travel.jpg" alt="" />
         <div class="home-nav">
           <h4 class="home-title">Popular</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, placeat possimus expedita nesciunt ratione provident qui debitis veritatis consectetur iure recusandae, unde, neque praesentium non repudiandae id maiores. Eligendi, temporibus!</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+            placeat possimus expedita nesciunt ratione provident qui debitis
+            veritatis consectetur iure recusandae, unde, neque praesentium non
+            repudiandae id maiores. Eligendi, temporibus!
+          </p>
           <section class="carousel">
             <div class="carousel__container">
+              <!-- <div id="1" class="carousel-item destination-btn"  style="background-image: url(Images/melbourne.jpg);">
+                <div class="info">
+                  <h4 id="title-info" class="country-name">name</h4>
+                  <div id="title-info" class="stars">
+                    <i class="fas fa-star"></i> 4.5
+                  </div>
+                  <span class="save-search"><i id='heart' class="far fa-heart"></i>
+                </div>
+               </div> -->
+
               <!-- <div id="#${popDestination.alphaCode} class="carousel-item destination-btn"  style="background-image: url(Images/prague.jpg);"><a href="#germany">
                 <div class="info">
                   <h4 class="country-name">Country Name</h4>
@@ -50,66 +73,54 @@
       </div>
 
       <!-- Search Tab Content -->
-      <div id="search" class="search-container container active">
-        <img class="hero-image" src="Images/world-travel.jpg" alt="">
+      <div id="search" class="search-container container hidden">
+        <img class="hero-image" src="Images/world-travel.jpg" alt="" />
         <div class="search-nav">
           <form action="" method="POST" name="form">
-            <input class="form-styling search-field"  type="text" name="username" placeholder="Search for a country"/>
+            <input
+              class="form-styling search-field"
+              type="text"
+              name="username"
+              placeholder="Search for a country"
+            />
           </form>
           <div class="results">Results Here</div>
           <div class="pagination">
             <!-- <a href="#" class="pagination-button btn-prev" id="pagination">Page x</a>
             <a href="#" class="pagination-button btn-next" id="pagination">Page x</a>
             -->
-          </div> 
-        </div> 
-
-
-        <div class="search-card-container">
-          <!-- <div id='alphaCode'
-            class="search-card"
-            style="
-              background-image: url(Images/world-travel.jpg);
-            "
-          >
-          <div class="save-search-btn-container">
-            <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i></a>
-          </div>
-            <div class="search-content-container">
-              <div class="search-content">
-                <h6>Paris</h6>
-                <h3 class="country-name">France</h3>
-              </div>
-            </div>
-          </div> -->
-    
-          <!-- <a href="#BRA">      
-            <div id='#BRA'                  class="search-card destination-btn"
-                          style="
-                            background-image: url(Images/around-the-world.jpg);
-                          "
-                        >
-                        <div class="save-search-btn-container">
-                          <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i></a>
-                        </div>
-                          <div class="search-content-container">
-                            <div class="search-content">
-                              <h6>#</h6>
-                              <h3 class="country-name">#</h3>
-                            </div>
-                          </div>
-                        </div> 
-                        </a> -->
-        
           </div>
         </div>
 
+        <div class="search-card-container">
+          <!-- <a href="#${country.alphaCode}"><div id=#${country.alphaCode} class="search-card destination-btn"
+            style="
+            background-image: url(${country.flag});
+            "
+            >
+                        <div class="save-search-btn-container">
+                          <span class="save-search"><i id='heart' class="far fa-heart"></i>
+                        </div>
+                        <div class="search-content-container ">
+                            <div class="search-content">
+                              <h6>${country.capital}</h6>
+                              <h3 class="country-name">${country.name}</h3>
+                            </div>
+                        </div>
+                    </div> 
+                </a> -->
+        </div>
+      </div>
+
       <div id="saved" class="saved-container container hidden">
-        <img class="hero-image" src="Images/world-travel.jpg" alt="">
-     
+        <img class="hero-image" src="Images/world-travel.jpg" alt="" />
+
         <div class="saved-title">
           <h3>Saved Destinations</h3>
-          <p>Click on one of your saved destinations to either book a trip or remove from your list!</p>
+          <p>
+            Click on one of your saved destinations to either book a trip or
+            remove from your list!
+          </p>
         </div>
         <div class="saved-card-container">
           <div
@@ -121,28 +132,30 @@
               <h3 class="country-name">Country</h3>
             </div>
           </div>
-          
         </div>
       </div>
 
       <div id="booked" class="booked-container container hidden">
-        <img class="hero-image" src="Images/world-travel.jpg" alt="">
+        <img class="hero-image" src="Images/world-travel.jpg" alt="" />
         <div class="booked-title">
           <h3>Booked Destinations</h3>
-          <p>Click on one of your booked destinations to either book a trip or remove from your list!</p>
+          <p>
+            Click on one of your booked destinations to either book a trip or
+            remove from your list!
+          </p>
         </div>
         <div class="booking">
-            <div class="booked-card-container">
-              <div
-                class="booked-card"
-                style="background-image: url(Images/paris.jpg)"
-              >
-                <div class="booked-card-content">
-                  <h6>Capital</h6>
-                  <h3 class="country-name">Country</h3>
-                </div>
+          <div class="booked-card-container">
+            <div
+              class="booked-card"
+              style="background-image: url(Images/paris.jpg)"
+            >
+              <div class="booked-card-content">
+                <h6>Capital</h6>
+                <h3 class="country-name">Country</h3>
               </div>
             </div>
+          </div>
           <div class="booking-details">
             <div class="details travelers small-info">
               <h6>People</h6>
@@ -165,7 +178,7 @@
           </svg>
         </div> -->
 
-        <!-- <div class="error">
+      <!-- <div class="error">
             <div>
               <svg>
                 <use href="src/img/icons.svg#icon-alert-triangle"></use>

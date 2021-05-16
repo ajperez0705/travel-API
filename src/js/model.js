@@ -47,11 +47,9 @@ export const loadPopCountries = async function (popCountries) {
 // Push the created object into an array and return the array at the end
 
 export const setCountryCode = function (el) {
-  const destination = el.closest(".destination-btn");
+  if (!el) return;
 
-  if (!destination) return;
-
-  window.location.hash = destination.id;
+  window.location.hash = el.id;
 
   return window.location.hash.slice(1);
 };
@@ -155,4 +153,16 @@ export const clearSearchResults = function (content) {
   state.search.results = [];
   state.search.query = "";
   content.innerHTML = "";
+};
+
+export const saveDestination = function (btn) {
+  if (!btn) return;
+
+  if (btn.classList.contains("far")) {
+    btn.classList.remove("far");
+    btn.classList.add("fas");
+  } else if (btn.classList.contains("fas")) {
+    btn.classList.remove("fas");
+    btn.classList.add("far");
+  }
 };

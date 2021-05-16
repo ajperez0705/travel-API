@@ -62,28 +62,7 @@
         position: relative;
       }
     }
-    .save-search-btn-container {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      .fa-heart-o {
-        color: white;
-        cursor: pointer;
-      }
 
-      .fa-heart {
-        color: white;
-        cursor: pointer;
-      }
-      .save-search {
-        color: white;
-        padding: 18px 24px;
-        // a {
-        //   text-decoration: none;
-        //   list-style: none;
-        // }
-      }
-    }
     .search-content-container {
       display: flex;
       align-items: flex-end;

@@ -8,7 +8,6 @@ class NavView {
   render(targetData, clickedData) {
     this._targetData = targetData;
     this._clickedData = clickedData;
-    console.log(this._targetData, this._clickedData);
     this._settleNav(this._targetData, this._clickedData);
   }
 
@@ -28,7 +27,6 @@ class NavView {
       const id = btn.id;
       if (!btn && !id) return;
       navData = [btn, id];
-      console.log(navData);
       handler(navData);
     });
   }

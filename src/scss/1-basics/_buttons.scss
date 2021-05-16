@@ -23,3 +23,25 @@
     }
   }
 }
+
+// Save buttons
+.save-search > * {
+  // z-index: 14;
+  color: white;
+  padding: 18px 24px;
+  // a {
+  //   text-decoration: none;
+  //   list-style: none;
+  // }
+}
+
+#heart.far.fa-heart {
+  // z-index: 101;
+  color: white;
+  cursor: pointer;
+}
+
+#heart.fas.fa-heart {
+  color: red;
+  cursor: pointer;
+}

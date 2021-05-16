@@ -8,6 +8,7 @@ import navView from "./views/navView.js";
 import modalView from "./views/modalView.js";
 import searchView from "./views/searchView.js";
 import paginationView from "./views/paginationView.js";
+import savedDestinationView from "./views/saveDestinationView";
 
 // import "core-js/stble";
 import "regenerator-runtime/runtime";
@@ -66,6 +67,10 @@ const modalClose = function (ev) {
   model.closeModal(ev);
 };
 
+const modalSave = function (btn) {
+  model.saveDestination(btn);
+};
+
 const controlSearchRes = async function () {
   // Clears the previous search
   model.clearSearchResults(config.SEARCH_CONTAINER);
@@ -96,14 +101,18 @@ const controlPagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
+const controlSave = function () {};
+
 // Pub - Sub Pattern
 const init = function () {
   popDestinationView.addHandlerRender(loadHome);
   navView.navHandlerClick(controlNav);
   modalView.modalHandlerClick(modalControl);
   modalView.modalHandlerCloseRe(modalClose);
+  modalView.modalSaveDestination(modalSave);
   searchView.addHandlerSearch(controlSearchRes);
   paginationView.addHandlerClick(controlPagination);
+  savedDestinationView.addHandlerClick(controlSave);
 };
 
 init();
