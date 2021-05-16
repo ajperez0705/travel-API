@@ -48,12 +48,12 @@ const controlNav = function (data) {
 
 const modalControl = async function (destinationBtn) {
   const countryCode = model.setCountryCode(destinationBtn);
+  if (!countryCode) return;
 
-  modalView._toggleModal(config.modalContainer, config.overlay);
+  modalView.toggleModal(config.modalContainer, config.overlay);
 
   try {
     let countryData = await model.countryModalDetails(countryCode);
-    console.log(countryData);
     // if (!COUNTRY_CODE) return;
 
     modalView.render(countryData);
@@ -67,15 +67,16 @@ const modalClose = function (ev) {
 };
 
 const controlSearchRes = async function () {
+  // Clears the previous search
+  model.clearSearchResults(config.SEARCH_CONTAINER);
+
   try {
+    // Grabs the value of the search input
     const query = searchView.getQuery();
     if (!query) return;
 
-    // const searchResults = await model.searchResults(query);
-    // console.log(searchResults);
-
+    // Requests countries based on query
     await model.searchResults(query);
-    console.log(model.state.search.results);
 
     // Render the search results
     searchView.render(model.getSearchResultsPage());
@@ -87,6 +88,14 @@ const controlSearchRes = async function () {
   }
 };
 
+const controlPagination = function (goToPage) {
+  // Render NEW search results
+  searchView.render(model.getSearchResultsPage(goToPage));
+
+  // Render NEW pagination buttons
+  paginationView.render(model.state.search);
+};
+
 // Pub - Sub Pattern
 const init = function () {
   popDestinationView.addHandlerRender(loadHome);
@@ -94,6 +103,7 @@ const init = function () {
   modalView.modalHandlerClick(modalControl);
   modalView.modalHandlerCloseRe(modalClose);
   searchView.addHandlerSearch(controlSearchRes);
+  paginationView.addHandlerClick(controlPagination);
 };
 
 init();

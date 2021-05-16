@@ -19,7 +19,7 @@ class ModalView {
     });
   }
 
-  _toggleModal(modal, overlay) {
+  toggleModal(modal, overlay) {
     // Control the modal
     modal.classList.remove("hidden");
     overlay.classList.remove("hidden");
@@ -48,6 +48,7 @@ class ModalView {
   }
 
   #generateModalMarkup(data) {
+    console.log(data.name);
     return `
       <div class="hero-image" style="background-image: url(${data.flag});">
             
@@ -62,7 +63,7 @@ class ModalView {
         <div class="modal-grid">
             <div class="modal-card" id="language">
               <h5 class="modal-card-title">Language</h5>
-              <p class="modal-card-content">${data.language}</p>
+              <p class="modal-card-content">${data.languages[0].name}</p>
             </div>
             <div class="modal-card" id="capital">
               <h5 class="modal-card-title">Capital</h5>
@@ -78,7 +79,7 @@ class ModalView {
             </div>
             <div class="modal-card" id="Currency">
               <h5 class="modal-card-title">Currency</h5>
-              <p class="modal-card-content">${data.currency}</p>
+              <p class="modal-card-content">${data.currencies[0].name}, ${data.currencies[0].symbol}</p>
            </div>
           <div class="btn-container">
               <button class="modal-btn cancel-btn" id="cancel-btn"><a href="#"></a>Cancel</button>

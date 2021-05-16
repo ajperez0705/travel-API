@@ -25,3 +25,7 @@ export const modalContainer = document.querySelector(".modal-container");
 export const overlay = document.querySelector(".overlay");
 
 export const RES_PER_PAGE = 12;
+
+export const SEARCH_CONTAINER = document.querySelector(
+  ".search-card-container"
+);

@@ -49,6 +49,8 @@ export const loadPopCountries = async function (popCountries) {
 export const setCountryCode = function (el) {
   const destination = el.closest(".destination-btn");
 
+  if (!destination) return;
+
   window.location.hash = destination.id;
 
   return window.location.hash.slice(1);
@@ -145,7 +147,12 @@ export const getSearchResultsPage = function (page = state.search.page) {
 
   const start = (page - 1) * state.search.resultsPerPage;
   const end = page * state.search.resultsPerPage;
-  console.log(state.search.results.slice(start, end));
 
   return state.search.results.slice(start, end);
+};
+
+export const clearSearchResults = function (content) {
+  state.search.results = [];
+  state.search.query = "";
+  content.innerHTML = "";
 };
