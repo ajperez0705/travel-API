@@ -11,9 +11,9 @@
     margin: 40px 0;
   }
   .saved-card-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
     .saved-card {
       @include bg-img-pos;
       height: 270px;
@@ -24,6 +24,8 @@
       width: 600px;
       cursor: pointer;
       box-shadow: $box-shadow;
+
+      margin: 40px 0;
     }
     .saved-card-content {
       color: $primary-text;

@@ -98,7 +98,6 @@ export const closeModal = function (ev) {
 
 export const navChange = function (btn) {
   let navData = [];
-  // if (!id) return;
   const id = btn.id;
 
   return (navData = [btn, id]);

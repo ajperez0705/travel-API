@@ -8,6 +8,7 @@ import navView from "./views/navView.js";
 import modalView from "./views/modalView.js";
 import searchView from "./views/searchView.js";
 import paginationView from "./views/paginationView.js";
+import saveView from "./views/saveView";
 
 // import "core-js/stble";
 import "regenerator-runtime/runtime";
@@ -93,11 +94,16 @@ const controlPagination = function (goToPage) {
 };
 
 const controlAddSave = function () {
+  // Add/Remove Save
   if (!model.state.countryDetails.saved)
     model.addSave(model.state.countryDetails);
   else model.deleteSave(model.state.countryDetails.alphaCode);
 
+  // Update the Modal View
   modalView.update(model.state.countryDetails);
+
+  // Render the save destinations
+  saveView.render(model.state.saved);
 };
 
 // Pub - Sub Pattern

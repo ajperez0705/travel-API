@@ -17,6 +17,7 @@ class NavView extends MasterView {
   navHandlerClick(handler) {
     this._parentEl.addEventListener("click", function (e) {
       const btn = e.target.closest(".nav-btn");
+      if (!btn) return;
       handler(btn);
     });
   }
