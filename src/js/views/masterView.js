@@ -19,8 +19,8 @@ export default class MasterView {
 
   update(data) {
     this._data = data;
-    console.log(data);
     const newMarkup = this._generateMarkup();
+    console.log(newMarkup);
 
     const newDOM = document.createRange().createContextualFragment(newMarkup);
     const newElements = Array.from(newDOM.querySelectorAll("*"));

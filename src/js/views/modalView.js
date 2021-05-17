@@ -19,6 +19,14 @@ class ModalView extends MasterView {
     });
   }
 
+  addSaveDestination(handler) {
+    this._modalContainer.addEventListener("click", function (e) {
+      const btn = e.target.closest(".save-btn");
+      if (!btn) return;
+      handler();
+    });
+  }
+
   toggleModal(modal, overlay) {
     // Control the modal
     modal.classList.remove("hidden");
@@ -32,25 +40,40 @@ class ModalView extends MasterView {
   }
 
   renderModal(data) {
-    const markup = this._generateModalMarkup(data);
+    const markup = this._generateMarkup(data);
     this._modalContainer.insertAdjacentHTML("afterbegin", markup);
   }
 
-  saveDestination(handler) {
-    this._modalContainer.addEventListener("click", function (e) {
-      const btn = e.target.closest(".save-btn");
-      if (!btn) return;
-      handler(btn);
+  update(data) {
+    const newMarkup = this._generateMarkup(data);
+
+    const newDOM = document.createRange().createContextualFragment(newMarkup);
+    const newElements = Array.from(newDOM.querySelectorAll("*"));
+    const curElements = Array.from(this._modalContainer.querySelectorAll("*"));
+
+    newElements.forEach((newEl, i) => {
+      const curEl = curElements[i];
+
+      if (
+        !newEl.isEqualNode(curEl) &&
+        newEl.classList.contains("save-search")
+      ) {
+        curEl.innerHTML = newEl.innerHTML;
+      }
     });
   }
 
-  _generateModalMarkup(data) {
+  // && newEl.nodeName === "i"
+
+  _generateMarkup(data) {
     return `
       <div class="hero-image" style="background-image: url(${data.flag});">
             
           <div class="save-search-btn-container">
             <span class="save-search">
-              <i  id = heart class="save-btn far fa-heart"></i></a>
+              <i  id = heart class="save-btn ${
+                data.saved ? "fas" : "far"
+              } fa-heart"></i></a>
           </div>
           <div class="modal-title">
             <h6 class="capital">${data.capital}</h6>
@@ -76,7 +99,9 @@ class ModalView extends MasterView {
             </div>
             <div class="modal-card" id="Currency">
               <h5 class="modal-card-title">Currency</h5>
-              <p class="modal-card-content">${data.currencyName}, ${data.currencySymbol}</p>
+              <p class="modal-card-content">${data.currencyName}, ${
+      data.currencySymbol
+    }</p>
            </div>
           <div class="btn-container">
               <button class="modal-btn cancel-btn" id="cancel-btn"><a href="#"></a>Cancel</button>

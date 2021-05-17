@@ -92,8 +92,12 @@ const controlPagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
-const controlSave = function (btn) {
-  model.addSave(btn);
+const controlAddSave = function () {
+  if (!model.state.countryDetails.saved)
+    model.addSave(model.state.countryDetails);
+  else model.deleteSave(model.state.countryDetails.alphaCode);
+
+  modalView.update(model.state.countryDetails);
 };
 
 // Pub - Sub Pattern
@@ -107,13 +111,11 @@ const init = function () {
   // Modal Control
   modalView.modalHandlerClick(modalControl);
   modalView.modalHandlerCloseRe(modalClose);
+  modalView.addSaveDestination(controlAddSave);
 
   // Search Control
   searchView.addHandlerSearch(controlSearchRes);
   paginationView.addHandlerClick(controlPagination);
-
-  // Control Like Button
-  modalView.saveDestination(controlSave);
 };
 
 init();

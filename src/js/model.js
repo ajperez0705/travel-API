@@ -69,7 +69,12 @@ export const countryModalDetails = async function (countryCode) {
       currencySymbol: countryData.currencies[0].symbol,
       saved: countryData.saved,
     };
-    console.log(state.countryDetails);
+    if (state.saved.some((saves) => saves.alphaCode === countryCode))
+      state.countryDetails.saved = true;
+    else state.countryDetails.saved = false;
+
+    console.log(state.countryDetails.saved);
+
     return state.countryDetails;
   } catch (err) {
     console.log(`Error loading the modal ${err} 🔥`);
@@ -93,8 +98,8 @@ export const closeModal = function (ev) {
 
 export const navChange = function (btn) {
   let navData = [];
+  // if (!id) return;
   const id = btn.id;
-  if (!id) return;
 
   return (navData = [btn, id]);
 };
@@ -134,6 +139,21 @@ export const clearSearchResults = function (content) {
   content.innerHTML = "";
 };
 
-export const addSave = function (destination) {
-  state.saved.push(destination);
+export const addSave = function (destinationDetails) {
+  // Add saved destination
+  state.saved.push(destinationDetails);
+
+  console.log(destinationDetails);
+
+  // Mark current destination as saved
+  if (destinationDetails.alphaCode === state.countryDetails.alphaCode)
+    state.countryDetails.saved = true;
+};
+
+export const deleteSave = function (alphaCode) {
+  const index = state.saved.findIndex((el) => el.alphaCode === alphaCode);
+  state.saved.splice(index, 1);
+
+  if (alphaCode === state.countryDetails.alphaCode)
+    state.countryDetails.saved = false;
 };
