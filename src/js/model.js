@@ -13,11 +13,12 @@ export const state = {
     page: 1,
     resultsPerPage: config.RES_PER_PAGE,
   },
+  saved: [],
 };
 
-export const popCountries = ["USA", "FRA", "MEX", "DEU", "BRA"];
+export const popCountries = ["USA", "FRA", "MEX", "DEU", "ITA"];
 
-// 1. Load the home screen
+/******************************Loading Home Screen******************************/
 export const loadPopCountries = async function (popCountries) {
   const popCountriesData = [];
 
@@ -44,40 +45,35 @@ export const loadPopCountries = async function (popCountries) {
   return popCountriesData;
 };
 
-// Push the created object into an array and return the array at the end
+export const setCountryCode = function (destinationBtn) {
+  if (!destinationBtn) return;
 
-export const setCountryCode = function (el) {
-  const destination = el.closest(".destination-btn");
-
-  if (!destination) return;
-
-  window.location.hash = destination.id;
+  window.location.hash = destinationBtn.id;
 
   return window.location.hash.slice(1);
 };
 
-// Home
-// X. Render the country details on click inside of the modal
 export const countryModalDetails = async function (countryCode) {
-  // if (!COUNTRY_CODE) return;
   try {
     const data = await getJSON(`${config.API_URL}/${countryCode}`);
-    return data;
+
+    let countryData = data;
+    state.countryDetails = {
+      name: countryData.name,
+      capital: countryData.capital,
+      alphaCode: countryData.alpha3Code,
+      flag: countryData.flag,
+      language: countryData.languages[0].name,
+      population: countryData.population,
+      currencyName: countryData.currencies[0].name,
+      currencySymbol: countryData.currencies[0].symbol,
+      saved: countryData.saved,
+    };
+    console.log(state.countryDetails);
+    return state.countryDetails;
   } catch (err) {
     console.log(`Error loading the modal ${err} 🔥`);
   }
-  let countryData = data;
-  console.log(countryData);
-  state.countryDetails = {
-    name: countryData.name,
-    capital: countryData.capital,
-    alphaCode: countryData.alpha3Code,
-    flag: countryData.flag,
-    language: countryData.languages[0].name,
-    population: countryData.population,
-    currency: countryData.currencies[0].name,
-  };
-  return state.countryDetails;
 };
 
 export const closeModal = function (ev) {
@@ -91,32 +87,16 @@ export const closeModal = function (ev) {
     config.overlay.classList.add("hidden");
     window.location.hash = "";
     config.modalContainer.innerHTML = "";
-    state.countryDetails = {};
+    // state.countryDetails = {};
   } else return;
 };
 
-// export const closeModal = function () {
-//   config.modalContainer.classList.add("hidden");
-//   config.overlay.classList.add("hidden");
-//   window.location.hash = "";
-//   config.modalContainer.innerHTML = "";
-//   console.log(state.country);
-//   state.countryDetails = {};
-// };
-/******************Nav Controller*************************/
-// export const navChange = function (e) {
-//   let target, clickedLink;
-//   let navData = [];
-//   target = e.target;
-//   clickedLink = this.id;
-//   console.log(target);
-//   navData = [target, clickedLink];
-//   console.log(navData);
-//   return navData;
-// };
+export const navChange = function (btn) {
+  let navData = [];
+  const id = btn.id;
+  if (!id) return;
 
-export const navChange = function (data) {
-  return data;
+  return (navData = [btn, id]);
 };
 
 export const searchResults = async function (query) {
@@ -138,9 +118,6 @@ export const searchResults = async function (query) {
   }
 };
 
-// To extract the data
-//
-
 // Pagination
 export const getSearchResultsPage = function (page = state.search.page) {
   state.search.page = page;
@@ -155,4 +132,8 @@ export const clearSearchResults = function (content) {
   state.search.results = [];
   state.search.query = "";
   content.innerHTML = "";
+};
+
+export const addSave = function (destination) {
+  state.saved.push(destination);
 };

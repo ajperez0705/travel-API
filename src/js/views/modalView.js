@@ -1,21 +1,21 @@
 // import * as config from "../config.js";
 
 import { modalContainer } from "../config";
+import MasterView from "./masterView";
 
-class ModalView {
-  #parentEl = document.querySelector(".content-container");
+class ModalView extends MasterView {
+  _parentEl = document.querySelectorAll(".container");
   _modalContainer = document.querySelector(".modal-container");
   _overlay = document.querySelector(".overlay");
-  #data;
 
   modalHandlerClick(handler) {
-    /***********Click on card and activate modal + render country details************/
-    // Gain access to the parent class (content-container) and add an event listener that checks for e === destination-btn
-    this.#parentEl.addEventListener("click", function (e) {
-      e.preventDefault();
-      const destinationBtn = e.target;
+    this._parentEl.forEach((container) => {
+      container.addEventListener("click", function (e) {
+        e.preventDefault();
+        const destinationBtn = e.target.closest(".destination-btn");
 
-      handler(destinationBtn);
+        handler(destinationBtn);
+      });
     });
   }
 
@@ -25,35 +25,32 @@ class ModalView {
     overlay.classList.remove("hidden");
   }
 
-  // modalHandlerClose(handler, modalContainer) {
-  //   this.#parentEl.addEventListener("keydown", function (e) {
-  //     e.preventDefault();
-  //     console.log("clicked");
-  //     if (e.key === "Escape" && !modalContainer.classList.contains("hidden")) {
-  //       handler();
-  //     } else return;
-  //   });
-  // }
-
   modalHandlerCloseRe(handler) {
     ["keydown", "click"].forEach((ev) => {
       this._modalContainer.addEventListener(ev, handler);
     });
   }
 
-  render(data) {
-    this.#data = data;
-    const markup = this.#generateModalMarkup(data);
+  renderModal(data) {
+    const markup = this._generateModalMarkup(data);
     this._modalContainer.insertAdjacentHTML("afterbegin", markup);
   }
 
-  #generateModalMarkup(data) {
-    console.log(data.name);
+  saveDestination(handler) {
+    this._modalContainer.addEventListener("click", function (e) {
+      const btn = e.target.closest(".save-btn");
+      if (!btn) return;
+      handler(btn);
+    });
+  }
+
+  _generateModalMarkup(data) {
     return `
       <div class="hero-image" style="background-image: url(${data.flag});">
             
           <div class="save-search-btn-container">
-            <span class="save-search"><i  id = heart class="far fa-heart" aria-hidden="true" ></i></a>
+            <span class="save-search">
+              <i  id = heart class="save-btn far fa-heart"></i></a>
           </div>
           <div class="modal-title">
             <h6 class="capital">${data.capital}</h6>
@@ -63,7 +60,7 @@ class ModalView {
         <div class="modal-grid">
             <div class="modal-card" id="language">
               <h5 class="modal-card-title">Language</h5>
-              <p class="modal-card-content">${data.languages[0].name}</p>
+              <p class="modal-card-content">${data.language}</p>
             </div>
             <div class="modal-card" id="capital">
               <h5 class="modal-card-title">Capital</h5>
@@ -79,7 +76,7 @@ class ModalView {
             </div>
             <div class="modal-card" id="Currency">
               <h5 class="modal-card-title">Currency</h5>
-              <p class="modal-card-content">${data.currencies[0].name}, ${data.currencies[0].symbol}</p>
+              <p class="modal-card-content">${data.currencyName}, ${data.currencySymbol}</p>
            </div>
           <div class="btn-container">
               <button class="modal-btn cancel-btn" id="cancel-btn"><a href="#"></a>Cancel</button>
@@ -91,3 +88,13 @@ class ModalView {
 }
 
 export default new ModalView();
+
+// modalHandlerClose(handler, modalContainer) {
+//   this.#parentEl.addEventListener("keydown", function (e) {
+//     e.preventDefault();
+//     console.log("clicked");
+//     if (e.key === "Escape" && !modalContainer.classList.contains("hidden")) {
+//       handler();
+//     } else return;
+//   });
+// }

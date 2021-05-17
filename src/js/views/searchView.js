@@ -1,29 +1,37 @@
-class SearchView {
-  #parentEl = document.querySelector(".search-container");
-  #cardContainer = document.querySelector(".search-card-container");
-  #data;
+import MasterView from "./masterView";
+
+class SearchView extends MasterView {
+  _parentEl = document.querySelector(".search-container");
+  _cardContainer = document.querySelector(".search-card-container");
+
+  addHandlerSearch(handler) {
+    this._parentEl.addEventListener("submit", function (e) {
+      e.preventDefault();
+      handler();
+    });
+  }
 
   getQuery() {
-    const query = this.#parentEl.querySelector(".search-field").value;
-    this.#clearInput();
+    const query = this._parentEl.querySelector(".search-field").value;
+    this._clearInput();
     return query;
   }
 
-  #clearInput() {
-    this.#parentEl.querySelector(".search-field").value = "";
+  _clearInput() {
+    this._parentEl.querySelector(".search-field").value = "";
   }
 
   render(data) {
-    this.#data = data;
-    const markup = this.#genMarkup(data);
-    this.#cardContainer.insertAdjacentHTML("afterbegin", markup);
+    this._data = data;
+    const markup = this._genMarkup(data);
+    this._cardContainer.insertAdjacentHTML("afterbegin", markup);
   }
 
-  #genMarkup(data) {
-    return data.map(this.#genMarkupPreview).join("");
+  _genMarkup(data) {
+    return data.map(this._genMarkupPreview).join("");
   }
 
-  #genMarkupPreview(country) {
+  _genMarkupPreview(country) {
     return `
       <a href="#${country.alphaCode}"><div id=#${country.alphaCode} class="search-card destination-btn"
     style="
@@ -42,13 +50,6 @@ class SearchView {
             </div> 
         </a>
             `;
-  }
-
-  addHandlerSearch(handler) {
-    this.#parentEl.addEventListener("submit", function (e) {
-      e.preventDefault();
-      handler();
-    });
   }
 }
 

@@ -11,9 +11,6 @@ import paginationView from "./views/paginationView.js";
 
 // import "core-js/stble";
 import "regenerator-runtime/runtime";
-// import { async, mark } from "regenerator-runtime/runtime";
-import icons from "../Images/icons.svg";
-import { search } from "core-js/fn/symbol";
 
 // API - https://restcountries.eu/
 // Country Codes - https://countrycode.org/
@@ -23,7 +20,6 @@ import { search } from "core-js/fn/symbol";
 
 /******************************Loading Pop Countries******************************/
 
-// 1. Fetch the API
 const loadHome = async function () {
   try {
     const popCountriesData = await model.loadPopCountries(model.popCountries);
@@ -37,13 +33,13 @@ const loadHome = async function () {
   }
 };
 
-const controlNav = function (data) {
-  let navData = model.navChange(data);
+const controlNav = function (btn, data) {
+  let navData = model.navChange(btn);
+
   const targetData = navData[0];
   const clickedData = navData[1];
 
-  // Render
-  navView.render(targetData, clickedData);
+  navView.renderNav(targetData, clickedData);
 };
 
 const modalControl = async function (destinationBtn) {
@@ -56,7 +52,7 @@ const modalControl = async function (destinationBtn) {
     let countryData = await model.countryModalDetails(countryCode);
     // if (!COUNTRY_CODE) return;
 
-    modalView.render(countryData);
+    modalView.renderModal(countryData);
   } catch (err) {
     console.error(err);
   }
@@ -96,14 +92,28 @@ const controlPagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
+const controlSave = function (btn) {
+  model.addSave(btn);
+};
+
 // Pub - Sub Pattern
 const init = function () {
+  // Load Home Screen
   popDestinationView.addHandlerRender(loadHome);
+
+  // Nav Control
   navView.navHandlerClick(controlNav);
+
+  // Modal Control
   modalView.modalHandlerClick(modalControl);
   modalView.modalHandlerCloseRe(modalClose);
+
+  // Search Control
   searchView.addHandlerSearch(controlSearchRes);
   paginationView.addHandlerClick(controlPagination);
+
+  // Control Like Button
+  modalView.saveDestination(controlSave);
 };
 
 init();

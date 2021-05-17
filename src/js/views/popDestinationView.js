@@ -1,29 +1,19 @@
-class PopDestinationView {
-  #parentEl = document.querySelector(".carousel__container");
-  #data;
+import MasterView from "./masterView";
 
-  // Spinner is not working yet
-  // renderSpinner = function (parentEl) {
-  //   const markup = `<div class="spinner">
-  //   <svg>
-  //     <use href="${icons}.svg_icon-loader"></use>
-  //   </svg>
-  // </div>
-  // `;
-  //   parentEl.innerHTML = "";
-  //   parentEl.insertAdjacentHTML("afterbegin", markup);
-  // };
+class PopDestinationView extends MasterView {
+  _parentEl = document.querySelector(".carousel__container");
+  _errorMessage = "No destinations could be loaded";
+  _successMessage = "";
 
   render(data) {
-    this.#data = data;
-    this.#generateDestinationMarkup(this.#data);
+    this._generateDestinationMarkup(data);
   }
 
   addHandlerRender(handler) {
     handler();
   }
 
-  #generateDestinationMarkup(data) {
+  _generateDestinationMarkup(data) {
     data.forEach((country) => {
       let markup = `
           <a href="#${country.alphaCode}">
@@ -35,11 +25,23 @@ class PopDestinationView {
                 </div>
               </div>
            </div>
-          </a>aAZ
+          </a>
           `;
-      this.#parentEl.insertAdjacentHTML("afterbegin", markup);
+      this._parentEl.insertAdjacentHTML("afterbegin", markup);
     });
   }
 }
+
+// Spinner is not working yet
+// renderSpinner = function (parentEl) {
+//   const markup = `<div class="spinner">
+//   <svg>
+//     <use href="${icons}.svg_icon-loader"></use>
+//   </svg>
+// </div>
+// `;
+//   parentEl.innerHTML = "";
+//   parentEl.insertAdjacentHTML("afterbegin", markup);
+// };
 
 export default new PopDestinationView();
