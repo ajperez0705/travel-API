@@ -73,8 +73,6 @@ export const countryModalDetails = async function (countryCode) {
       state.countryDetails.saved = true;
     else state.countryDetails.saved = false;
 
-    console.log(state.countryDetails.saved);
-
     return state.countryDetails;
   } catch (err) {
     console.log(`Error loading the modal ${err} 🔥`);
@@ -138,15 +136,19 @@ export const clearSearchResults = function (content) {
   content.innerHTML = "";
 };
 
+const persistSaves = function () {
+  localStorage.setItem("saved destinations", JSON.stringify(state.saved));
+};
+
 export const addSave = function (destinationDetails) {
   // Add saved destination
   state.saved.push(destinationDetails);
 
-  console.log(destinationDetails);
-
   // Mark current destination as saved
   if (destinationDetails.alphaCode === state.countryDetails.alphaCode)
     state.countryDetails.saved = true;
+
+  persistSaves();
 };
 
 export const deleteSave = function (alphaCode) {
@@ -155,4 +157,18 @@ export const deleteSave = function (alphaCode) {
 
   if (alphaCode === state.countryDetails.alphaCode)
     state.countryDetails.saved = false;
+
+  persistSaves();
+};
+
+const init = function () {
+  const storage = localStorage.getItem("saved destinations");
+  if (storage) state.saved = JSON.parse(storage);
+};
+init();
+
+// Used to clear saves in case needed
+export const clearStorage = function () {
+  localStorage.clear("saved destinations");
+  state.saved = [];
 };

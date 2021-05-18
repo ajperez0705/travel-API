@@ -95,21 +95,37 @@ const controlPagination = function (goToPage) {
 
 const controlAddSave = function () {
   // Add/Remove Save
-  if (!model.state.countryDetails.saved)
+  if (!model.state.countryDetails.saved) {
     model.addSave(model.state.countryDetails);
-  else model.deleteSave(model.state.countryDetails.alphaCode);
+    saveView.clear();
+
+    saveView.render(model.state.saved);
+  } else {
+    model.deleteSave(model.state.countryDetails.alphaCode);
+    saveView.clear();
+    saveView.render(model.state.saved);
+  }
 
   // Update the Modal View
   modalView.update(model.state.countryDetails);
+};
 
-  // Render the save destinations
+const controlSaves = function () {
   saveView.render(model.state.saved);
 };
+
+const clearSaves = function () {
+  model.clearStorage();
+  saveView.clear();
+};
+
+const bookDestination = function () {};
 
 // Pub - Sub Pattern
 const init = function () {
   // Load Home Screen
   popDestinationView.addHandlerRender(loadHome);
+  saveView.addHandlerRender(controlSaves);
 
   // Nav Control
   navView.navHandlerClick(controlNav);
@@ -122,6 +138,9 @@ const init = function () {
   // Search Control
   searchView.addHandlerSearch(controlSearchRes);
   paginationView.addHandlerClick(controlPagination);
+
+  // Control Saved Destinations
+  saveView.addHandlerClearSaves(clearSaves);
 };
 
 init();

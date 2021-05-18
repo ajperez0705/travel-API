@@ -26,6 +26,9 @@
       box-shadow: $box-shadow;
 
       margin: 40px 0;
+      a {
+        text-decoration: none;
+      }
     }
     .saved-card-content {
       color: $primary-text;
@@ -35,6 +38,9 @@
       width: 100%;
       h6 {
         opacity: 0.5;
+      }
+      h3 {
+        width: auto;
       }
     }
   }

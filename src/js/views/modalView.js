@@ -27,6 +27,8 @@ class ModalView extends MasterView {
     });
   }
 
+  addHandlerBook(handler) {}
+
   toggleModal(modal, overlay) {
     // Control the modal
     modal.classList.remove("hidden");
