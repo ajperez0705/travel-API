@@ -27,7 +27,14 @@ class ModalView extends MasterView {
     });
   }
 
-  addHandlerBook(handler) {}
+  addHandlerBook(handler) {
+    this._modalContainer.addEventListener("click", function (e) {
+      const btn = e.target.closest("#book-btn");
+      console.log("book clicked");
+      if (!btn) return;
+      handler();
+    });
+  }
 
   toggleModal(modal, overlay) {
     // Control the modal
@@ -106,8 +113,8 @@ class ModalView extends MasterView {
     }</p>
            </div>
           <div class="btn-container">
-              <button class="modal-btn cancel-btn" id="cancel-btn"><a href="#"></a>Cancel</button>
-              <button class="modal-btn" id="book-btn"><a href="#"></a>Book</button>
+              <button class="modal-btn cancel-btn" id="cancel-btn"><a href="#"></a>Exit</button>
+              
           </div>
         </div>
       `;
@@ -125,3 +132,7 @@ export default new ModalView();
 //     } else return;
 //   });
 // }
+
+{
+  /* <button class="modal-btn" id="book-btn"><a href="#"></a>Book</button> */
+}

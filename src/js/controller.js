@@ -9,9 +9,11 @@ import modalView from "./views/modalView.js";
 import searchView from "./views/searchView.js";
 import paginationView from "./views/paginationView.js";
 import saveView from "./views/saveView";
+import bookedView from "./views/bookedView";
 
 // import "core-js/stble";
 import "regenerator-runtime/runtime";
+import { search } from "core-js/fn/symbol";
 
 // API - https://restcountries.eu/
 // Country Codes - https://countrycode.org/
@@ -81,7 +83,7 @@ const controlSearchRes = async function () {
     // Render initial pagination buttons
     paginationView.render(model.state.search);
   } catch (err) {
-    console.error(`${err} found in search call within model`);
+    searchView.renderError();
   }
 };
 
@@ -134,6 +136,7 @@ const init = function () {
   modalView.modalHandlerClick(modalControl);
   modalView.modalHandlerCloseRe(modalClose);
   modalView.addSaveDestination(controlAddSave);
+  modalView.addHandlerBook(bookDestination);
 
   // Search Control
   searchView.addHandlerSearch(controlSearchRes);
@@ -141,6 +144,8 @@ const init = function () {
 
   // Control Saved Destinations
   saveView.addHandlerClearSaves(clearSaves);
+
+  // Control Booked Destinations
 };
 
 init();

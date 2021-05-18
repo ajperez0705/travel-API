@@ -75,7 +75,7 @@ export const countryModalDetails = async function (countryCode) {
 
     return state.countryDetails;
   } catch (err) {
-    console.log(`Error loading the modal ${err} 🔥`);
+    throw err;
   }
 };
 
@@ -106,6 +106,7 @@ export const searchResults = async function (query) {
     state.search.query = query;
 
     const data = await getJSON(`${config.API_SEARCH}/${query}`);
+    console.log(data.length);
 
     state.search.results = data.map((country) => {
       return {
@@ -172,3 +173,5 @@ export const clearStorage = function () {
   localStorage.clear("saved destinations");
   state.saved = [];
 };
+
+export const bookingModal = function () {};

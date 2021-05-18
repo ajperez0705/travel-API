@@ -1,4 +1,5 @@
 import { mark } from "regenerator-runtime";
+// import icons from ''
 
 export default class MasterView {
   _data;
@@ -44,18 +45,17 @@ export default class MasterView {
     this._parentElement.innerHTML = "";
   }
 
-  //   renderSpinner = function () {
-  //     const markup = `
-  //              <div class="spinner">
-  //                     <svg>
-  //                       <use href="${icons}#icon-loader"></use>
-  //                     </svg>
-  //                </div>
-  //             `;
-  //     this._clear();
-  //     this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  //   };
-  // }
+  renderSpinner = function () {
+    const markup = `
+               <div class="spinner">
+                      <svg>
+                        <use href="${icons}#icon-loader"></use>
+                      </svg>
+                 </div>
+              `;
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  };
 
   renderError(message = this._errorMessage) {
     const markup = `

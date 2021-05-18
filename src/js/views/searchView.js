@@ -3,6 +3,8 @@ import MasterView from "./masterView";
 class SearchView extends MasterView {
   _parentEl = document.querySelector(".search-container");
   _cardContainer = document.querySelector(".search-card-container");
+  _searchField = document.querySelector(".search-field");
+  _errorMessage = "Search for a destination";
 
   addHandlerSearch(handler) {
     this._parentEl.addEventListener("submit", function (e) {
@@ -21,8 +23,11 @@ class SearchView extends MasterView {
     this._parentEl.querySelector(".search-field").value = "";
   }
 
-  render(data) {
+  render(data, searchResults) {
     this._data = data;
+    console.log(data.length * 12);
+    const results = this._genResultsMarkup(searchResults);
+    this._searchField.insertAdjacentHTML("afterbegin", results);
     const markup = this._genMarkup(data);
     this._cardContainer.insertAdjacentHTML("afterbegin", markup);
   }
@@ -50,6 +55,24 @@ class SearchView extends MasterView {
             </div> 
         </a>
             `;
+  }
+
+  _genResultsMarkup(searchResults) {
+    return `
+    <div class="results">
+      <div class="result-content">Results Here</div>  
+    </div>
+    `;
+  }
+
+  renderError(message = this._errorMessage) {
+    const markup = `
+      <div class="error">
+         <p>${message}</p>
+       </div>
+    `;
+    this.clear();
+    this._cardContainer.insertAdjacentHTML("afterbegin", markup);
   }
 }
 

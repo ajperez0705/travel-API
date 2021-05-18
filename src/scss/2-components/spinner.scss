@@ -5,7 +5,7 @@
   svg {
     height: 6rem;
     width: 6rem;
-    fill: $primary-light;
+    fill: $secondary-dark;
     animation: rotate 2s infinite linear;
   }
 }
@@ -17,5 +17,28 @@
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.message,
+.error {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 5rem 4rem;
+
+  display: flex;
+
+  svg {
+    height: 3rem;
+    width: 3rem;
+    fill: $secondary-dark;
+    transform: translateY(-0.3rem);
+  }
+
+  p {
+    margin-left: 1.5rem;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    font-weight: 600;
   }
 }
